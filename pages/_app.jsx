@@ -1,4 +1,3 @@
-import { h } from "preact";
 import "../styles/_index.sass";
 
 function MyApp({ Component, pageProps }) {

@@ -1,9 +1,22 @@
 import { h } from "preact";
-import { useContext } from "preact/hooks";
+import { getMenus } from "../services/menuService";
+import Store from "../components/Store";
 import BaseLayout from "../components/layout/BaseLayout";
 
-const Index = () => {
-  return <BaseLayout>this is index</BaseLayout>;
+export async function getServerSideProps(context) {
+  const menus = await getMenus();
+
+  return {
+    props: { menus: menus },
+  };
+}
+
+const Index = (props) => {
+  return (
+    <Store.Provider value={{ ...props }}>
+      <BaseLayout>this is index</BaseLayout>
+    </Store.Provider>
+  );
 };
 
 export default Index;

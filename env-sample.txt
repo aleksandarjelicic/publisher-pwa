@@ -1,0 +1,2 @@
+NEXT_PUBLIC_API_URL=http://hasura.superdesk.org/v1/graphql
+NEXT_PUBLIC_TENANT_CODE=1bl1ia

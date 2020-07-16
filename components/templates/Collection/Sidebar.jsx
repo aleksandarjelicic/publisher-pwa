@@ -1,7 +1,6 @@
-import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
-const Csr = () => {
+const Sidebar = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -11,12 +10,12 @@ const Csr = () => {
       );
       const users = await response.json();
       setUsers(users);
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (
     <div>
-      <h2>this is client side fetched and rendered</h2>
+      <h2>sidebar csr</h2>
       <div class="list">
         {users.map((user) => (
           <p>{user.name}</p>
@@ -26,4 +25,4 @@ const Csr = () => {
   );
 };
 
-export default Csr;
+export default Sidebar;

@@ -1,9 +1,25 @@
 import { h } from "preact";
 import { getMenuItems } from "../services/menuService";
 import { useContext } from "preact/hooks";
+import { useRouter } from "next/router";
 import Store from "./Store";
-
 import Link from "next/link";
+
+const ActiveLink = ({ href, label }) => {
+  const router = useRouter();
+  const indexOfQuestionMark = router.asPath.indexOf("?");
+  const asPath = router.asPath.substring(
+    0,
+    indexOfQuestionMark !== -1 ? indexOfQuestionMark : router.asPath.length
+  );
+  const linkClassName = asPath === href ? "active" : "";
+
+  return (
+    <Link href="/[...slug]" as={href}>
+      <a className={linkClassName}>{label}</a>
+    </Link>
+  );
+};
 
 const Navigation = ({ menuName }) => {
   const store = useContext(Store);
@@ -13,12 +29,10 @@ const Navigation = ({ menuName }) => {
     <ul className="nav">
       {menuItems.map((item) => (
         <li>
-          <Link
-            href="[...slug]"
-            as={item.swp_route ? item.swp_route.staticprefix : item.uri}
-          >
-            <a>{item.label}</a>
-          </Link>
+          <ActiveLink
+            href={item.swp_route ? item.swp_route.staticprefix : item.uri}
+            label={item.label}
+          />
         </li>
       ))}
     </ul>
