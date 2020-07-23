@@ -35,7 +35,7 @@ export const matchRoute = async (slug, context) => {
       }
     }
   }
-  
+
   `;
 
   let url = "/" + slug.join("/");
@@ -74,7 +74,7 @@ export const matchRoute = async (slug, context) => {
   } else if (response.route.length) {
     return response.route[0];
   } else if (response.article.length) {
-    return { type: "article", ...response.swp_article[0] };
+    return { type: "article", ...response.article[0] };
   } else if (response.customRoute.length) {
     return response.customRoute[0];
   }

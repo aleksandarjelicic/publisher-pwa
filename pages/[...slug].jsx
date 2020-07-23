@@ -8,6 +8,7 @@ import Collection from "../components/templates/Collection/Collection";
 import Content from "../components/templates/Content/Content";
 import NotFound from "../components/templates/NotFound";
 import SectionCustomTemplate from "../components/templates/Collection/SectionCustomTemplate";
+import Author from "../components/templates/Author";
 
 import BaseLayout from "../components/layout/BaseLayout";
 
@@ -20,6 +21,7 @@ const components = {
   Content: Content,
   NotFound: NotFound,
   SectionCustomTemplate: SectionCustomTemplate,
+  Author: Author,
 };
 
 const renderer = (templateName) => {
@@ -61,14 +63,14 @@ Pages.getInitialProps = async (context) => {
     template = route.template_name;
   } else if (
     route.type === "article" &&
-    route.swp_route.article_template_name === default_article_template
+    route.swp_route.articles_template_name === default_article_template
   ) {
     template = "Article";
   } else if (
     route.type === "article" &&
-    route.swp_route.article_template_name !== default_article_template
+    route.swp_route.articles_template_name !== default_article_template
   ) {
-    template = route.swp_route.article_template_name;
+    template = route.swp_route.articles_template_name;
   } else if (route.type === "custom" && route.template_name) {
     template = route.template_name;
   }
@@ -77,7 +79,8 @@ Pages.getInitialProps = async (context) => {
     typeof components[template] !== "undefined" &&
     typeof components[template].getInitialProps !== "undefined"
   ) {
-    data = await components[template].getInitialProps(context, route);
+    // route.id is actually content id. Route id for section but article id for article
+    data = await components[template].getInitialProps(context, route.id);
   }
 
   return {

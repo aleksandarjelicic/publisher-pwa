@@ -10,18 +10,18 @@ export const getCollectionItems = (routeId, page = 1, limit = 10) => {
       aggregate {
         totalCount: count
       }
-    } 
+    }
     items: swp_article(limit: $limit, offset: $offset, order_by: {published_at: desc}, where: {tenant_code: {_eq: $tenant_code}, route_id: {_eq: $routeId}}) {
-      body
       comments_count
       feature_media
-      extra
       lead
       paywall_secured
       published_at
       slug
       title
-      status
+      swp_route {
+        staticprefix
+      }
     }
   }
 `;

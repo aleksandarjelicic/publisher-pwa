@@ -2,158 +2,28 @@
 
 exports[`ErrorLog/ErrorLog renders correctly 1`] = `
 <div
-  __self="[object Object]"
   __source="[object Object]"
-  class="jsx-1799183244 container"
 >
+  <div
+    __source="[object Object]"
+  >
+    <ul
+      __source="[object Object]"
+      class="nav"
+    />
+  </div>
   <main
-    __self="[object Object]"
     __source="[object Object]"
-    class="jsx-1799183244"
   >
-    <h1
-      __self="[object Object]"
-      __source="[object Object]"
-      class="jsx-1799183244 title"
-    >
-      Welcome to 
-      <a
-        __self="[object Object]"
-        __source="[object Object]"
-        class="jsx-1799183244"
-        href="https://nextjs.org"
-      >
-        Next.js!
-      </a>
-    </h1>
-    <p
-      __self="[object Object]"
-      __source="[object Object]"
-      class="jsx-1799183244 description"
-    >
-      Get started by editing 
-      <code
-        __self="[object Object]"
-        __source="[object Object]"
-        class="jsx-1799183244"
-      >
-        pages/index.js
-      </code>
-    </p>
-    <div
-      __self="[object Object]"
-      __source="[object Object]"
-      class="jsx-1799183244 grid"
-    >
-      <a
-        __self="[object Object]"
-        __source="[object Object]"
-        class="jsx-1799183244 card"
-        href="https://nextjs.org/docs"
-      >
-        <h3
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Documentation →
-        </h3>
-        <p
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Find in-depth information about Next.js features and API.
-        </p>
-      </a>
-      <a
-        __self="[object Object]"
-        __source="[object Object]"
-        class="jsx-1799183244 card"
-        href="https://nextjs.org/learn"
-      >
-        <h3
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Learn →
-        </h3>
-        <p
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Learn about Next.js in an interactive course with quizzes!
-        </p>
-      </a>
-      <a
-        __self="[object Object]"
-        __source="[object Object]"
-        class="jsx-1799183244 card"
-        href="https://github.com/zeit/next.js/tree/master/examples"
-      >
-        <h3
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Examples →
-        </h3>
-        <p
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Discover and deploy boilerplate example Next.js projects.
-        </p>
-      </a>
-      <a
-        __self="[object Object]"
-        __source="[object Object]"
-        class="jsx-1799183244 card"
-        href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      >
-        <h3
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Deploy →
-        </h3>
-        <p
-          __self="[object Object]"
-          __source="[object Object]"
-          class="jsx-1799183244"
-        >
-          Instantly deploy your Next.js site to a public URL with Vercel.
-        </p>
-      </a>
-    </div>
+    this is index
   </main>
-  <footer
-    __self="[object Object]"
+  <div
     __source="[object Object]"
-    class="jsx-1799183244"
   >
-    <a
-      __self="[object Object]"
+    <ul
       __source="[object Object]"
-      class="jsx-1799183244"
-      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      Powered by
-       
-      <img
-        __self="[object Object]"
-        __source="[object Object]"
-        alt="Vercel Logo"
-        class="jsx-1799183244 logo"
-        src="/vercel.svg"
-      />
-    </a>
-  </footer>
+      class="nav"
+    />
+  </div>
 </div>
 `;

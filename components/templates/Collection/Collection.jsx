@@ -9,9 +9,9 @@ import Sidebar from "./Sidebar";
 import Pagination from "./Pagination";
 
 class Collection extends Component {
-  static getInitialProps = (context, route) => {
+  static getInitialProps = (context, routeId) => {
     const page = context.query.page || 1;
-    return getCollectionItems(route.id, page).then((response) => response);
+    return getCollectionItems(routeId, page).then((response) => response);
   };
 
   state = {

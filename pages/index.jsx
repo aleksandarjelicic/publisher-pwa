@@ -1,22 +1,30 @@
-import { h } from "preact";
 import { getMenus } from "../services/menuService";
 import Store from "../components/Store";
 import BaseLayout from "../components/layout/BaseLayout";
-
-export async function getServerSideProps(context) {
-  const menus = await getMenus();
-
-  return {
-    props: { menus: menus },
-  };
-}
+import Homepage from "../components/templates/Homepage";
 
 const Index = (props) => {
   return (
     <Store.Provider value={{ ...props }}>
-      <BaseLayout>this is index</BaseLayout>
+      <BaseLayout>
+        <Homepage />
+      </BaseLayout>
     </Store.Provider>
   );
+};
+
+Index.getInitialProps = async (context) => {
+  const menus = await getMenus();
+  let data = {};
+
+  if (typeof Homepage.getInitialProps !== "undefined") {
+    data = await Homepage.getInitialProps(context);
+  }
+
+  return {
+    menus: menus,
+    data: data,
+  };
 };
 
 export default Index;
