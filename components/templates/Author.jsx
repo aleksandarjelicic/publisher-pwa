@@ -1,10 +1,10 @@
+import React from "react";
 import { getAuthorInfo } from "../../services/authorService";
-import { Component } from "preact";
 import Store from "../Store";
 
-class Author extends Component {
-  static getInitialProps = (context, articleId) => {
-    const authorSlug = "tomek-test-author";
+class Author extends React.Component {
+  static getProps = (context, id = null) => {
+    const authorSlug = context.params.slug[context.params.slug.length - 1];
 
     return getAuthorInfo(authorSlug).then((response) => response);
   };

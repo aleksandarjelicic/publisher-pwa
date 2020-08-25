@@ -3,8 +3,6 @@ import { request } from "graphql-request";
 const api_url = process.env.NEXT_PUBLIC_API_URL;
 const tenant_code = process.env.NEXT_PUBLIC_TENANT_CODE;
 
-// TODO: HANDLE REDIRECTS!!!!!!!
-
 export const matchRoute = async (slug, context) => {
   const ROUTE_QUERY = `
   query matchRoute($tenant_code: String!, $slug: String!, $staticprefix: String!, $staticprefix_noslug: String!) {
@@ -51,7 +49,7 @@ export const matchRoute = async (slug, context) => {
   })
     .then((data) => data)
     .catch((err) => {
-      console.log(err.response.errors);
+      if (err && err.response) console.log(err.response.errors);
       return { redirect: [], route: [], customRoute: [], article: [] };
     });
 

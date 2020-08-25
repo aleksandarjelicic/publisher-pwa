@@ -13,18 +13,18 @@ const Index = (props) => {
   );
 };
 
-Index.getInitialProps = async (context) => {
+export async function getStaticProps(context) {
   const menus = await getMenus();
   let data = {};
 
-  if (typeof Homepage.getInitialProps !== "undefined") {
-    data = await Homepage.getInitialProps(context);
+  if (typeof Homepage.getProps !== "undefined") {
+    data = await Homepage.getProps(context);
   }
 
   return {
-    menus: menus,
-    data: data,
+    props: { menus: menus, data: data },
+    revalidate: 1,
   };
-};
+}
 
 export default Index;

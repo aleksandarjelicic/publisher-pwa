@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import React, { useEffect, useState } from "react";
 
 const Sidebar = () => {
   const [users, setUsers] = useState([]);
@@ -16,9 +16,9 @@ const Sidebar = () => {
   return (
     <div>
       <h2>sidebar csr</h2>
-      <div class="list">
-        {users.map((user) => (
-          <p>{user.name}</p>
+      <div className="list">
+        {users.map((user, index) => (
+          <p key={"user" + index}>{user.name}</p>
         ))}
       </div>
     </div>

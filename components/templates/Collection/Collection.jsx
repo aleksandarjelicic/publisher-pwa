@@ -1,5 +1,4 @@
-import { Component } from "preact";
-import { useRef } from "preact/hooks";
+import React, { createRef } from "react";
 import Router from "next/router";
 import Store from "../../Store";
 import { getCollectionItems } from "../../../services/collectionService";
@@ -7,10 +6,11 @@ import { getCollectionItems } from "../../../services/collectionService";
 import Listing from "./Listing";
 import Sidebar from "./Sidebar";
 import Pagination from "./Pagination";
+import CollectionHead from "./CollectionHead";
 
-class Collection extends Component {
-  static getInitialProps = (context, routeId) => {
-    const page = context.query.page || 1;
+class Collection extends React.Component {
+  static getProps = (context, routeId) => {
+    const page = context.params.page || 1;
     return getCollectionItems(routeId, page).then((response) => response);
   };
 
@@ -36,13 +36,14 @@ class Collection extends Component {
   };
 
   // used to scroll to top of list when page changes
-  listTopRef = useRef(null);
+  listTopRef = createRef(null);
 
   render() {
     return (
       <Store.Consumer>
         {(store) => (
           <div>
+            <CollectionHead data={store} />
             <div className="grid">
               <div className="grid-element" ref={this.listTopRef}>
                 {this.state.isLoading ? (

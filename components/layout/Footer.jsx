@@ -1,5 +1,4 @@
-import { h } from "preact";
-import Navigation from "../Navigation";
+import Navigation from "./Navigation";
 
 const Footer = () => {
   return (

@@ -1,8 +1,7 @@
-import { h } from "preact";
-import { getMenuItems } from "../services/menuService";
-import { useContext } from "preact/hooks";
+import React, { useContext } from "react";
+import { getMenuItems } from "../../services/menuService";
 import { useRouter } from "next/router";
-import Store from "./Store";
+import Store from "../Store";
 import Link from "next/link";
 
 const ActiveLink = ({ href, label }) => {
@@ -27,8 +26,8 @@ const Navigation = ({ menuName }) => {
 
   return (
     <ul className="nav">
-      {menuItems.map((item) => (
-        <li>
+      {menuItems.map((item, index) => (
+        <li key={menuName + "-" + index}>
           <ActiveLink
             href={item.swp_route ? item.swp_route.staticprefix : item.uri}
             label={item.label}

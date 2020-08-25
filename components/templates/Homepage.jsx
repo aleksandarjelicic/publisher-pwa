@@ -1,12 +1,12 @@
 import { getContentList } from "../../services/contentListService";
-import { Component } from "preact";
+import React from "react";
 import Store from "../Store";
+import UniversalHead from "../layout/UniversalHead";
 
 import Item from "./Collection/Item";
-import { sortAndDeduplicateDiagnostics } from "typescript";
 
-class Homepage extends Component {
-  static getInitialProps = async (context) => {
+class Homepage extends React.Component {
+  static getProps = async (context) => {
     const list = await getContentList("AAA");
     const list2 = await getContentList("auto2");
     const somethingElse = "else";
@@ -20,24 +20,31 @@ class Homepage extends Component {
 
   render() {
     return (
-      <Store.Consumer>
-        {(store) => (
-          <div className="grid">
-            <div className="grid-element">
-              <h2>{store.data.list.name}</h2>
-              {store.data.list.items.map((item) => {
-                return <Item item={item.article} />;
-              })}
+      <>
+        <UniversalHead />
+        <Store.Consumer>
+          {(store) => (
+            <div className="grid">
+              <div className="grid-element">
+                <h2>{store.data.list.name}</h2>
+                {store.data.list.items.map((item, index) => {
+                  return (
+                    <Item key={item.slug + "-" + index} item={item.article} />
+                  );
+                })}
+              </div>
+              <div className="grid-element">
+                <h2>{store.data.list2.name}</h2>
+                {store.data.list2.items.map((item, index) => {
+                  return (
+                    <Item key={item.slug + "-" + index} item={item.article} />
+                  );
+                })}
+              </div>
             </div>
-            <div className="grid-element">
-              <h2>{store.data.list2.name}</h2>
-              {store.data.list2.items.map((item) => {
-                return <Item item={item.article} />;
-              })}
-            </div>
-          </div>
-        )}
-      </Store.Consumer>
+          )}
+        </Store.Consumer>
+      </>
     );
   }
 }

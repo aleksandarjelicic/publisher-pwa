@@ -1,5 +1,5 @@
-import { createContext } from "preact";
+import React from "react";
 
-const Store = createContext();
+const Store = React.createContext();
 
 export default Store;

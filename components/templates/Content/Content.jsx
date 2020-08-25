@@ -1,10 +1,9 @@
 import { getArticle } from "../../../services/articleService";
-import { Component } from "preact";
+import React from "react";
 import Store from "../../Store";
 
-class Content extends Component {
-  static getInitialProps = (context, articleId) => {
-    const page = context.query.page || 1;
+class Content extends React.Component {
+  static getProps = (context, articleId) => {
     return getArticle(articleId).then((response) => response);
   };
 
