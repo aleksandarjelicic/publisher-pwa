@@ -2,9 +2,9 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const BaseLayout = ({ children }) => (
-  <div>
+  <div className="container">
     <Header />
-    <main>{children}</main>
+    <main className="main">{children}</main>
     <Footer />
   </div>
 );

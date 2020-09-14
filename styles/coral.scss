@@ -1,0 +1,64 @@
+:root {
+    --elevation-main: 1px 0px 4px rgba(0, 0, 0, 0.25);
+    --palette-primary-darkest: #8a001f;
+    --palette-primary-dark: #b72025;
+    --palette-primary-main: #b92a2f;
+    --palette-primary-light: #bf353a;
+    --palette-primary-lighter: #c3464a;
+    --palette-primary-lightest: #eee;
+    --font-family-serif: "Source Sans Pro";
+}
+
+.AllCommentsTabContainer-stream-2qYTX > * {
+    padding: 10px;
+}
+
+.AllCommentsTabContainer-stream-2qYTX>:not(:first-child):not(button) {
+    padding-top: var(--spacing-4);
+    margin-bottom: calc(2*var(--mini-unit)) 0!important;
+}
+
+.coral-tabBar-tab {
+    font-size: 21px;
+    font-weight: 700;
+    border-top: 2px solid #b72025 !important;
+    padding: 10px 20px;
+}
+
+.coral-comment-topBar {
+    margin-bottom: 12px !important;
+}
+
+.coral-commentTag {
+    background: #fff !important;
+}
+
+.coral-comment-actionBar {
+    padding-bottom: 10px;
+}
+
+.StreamContainer-tabBarRow-3T4QQ {
+    border-bottom: 1px solid #555;
+}
+
+.StreamContainer-fixedTab-38Lht {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.Tab-secondary-SAOuB {
+    color: #333;
+}
+
+.Tab-secondary-SAOuB.Tab-active-XrGkw {
+    font-size: 21px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: 1px solid;
+    border-color: #555 #555 #fff;
+    border-top: 2px solid #b72025;
+}
+
+.Tab-root-33kKH {
+    font-size: 18px;
+}

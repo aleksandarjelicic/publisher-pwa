@@ -7,6 +7,7 @@ import Store from "../components/Store";
 import Article from "../components/templates/Article/Article";
 import ArticleAMP from "../components/templates/Article/amp/ArticleAMP";
 import Collection from "../components/templates/Collection/Collection";
+import CollectionLoadMore from "../components/templates/Collection/CollectionLoadMore";
 import Content from "../components/templates/Content/Content";
 import NotFound from "../components/templates/NotFound";
 import SectionCustomTemplate from "../components/templates/Collection/SectionCustomTemplate";
@@ -17,15 +18,18 @@ import BaseLayout from "../components/layout/BaseLayout";
 const default_collection_template = "category.html.twig";
 const default_article_template = "article.html.twig";
 
+// TODO
 let _canBeAMP = false;
+// TODO
 
 const components = {
   Article: Article,
   ArticleAMP: ArticleAMP,
-  Collection: Collection,
   Content: Content,
   Author: Author,
   NotFound: NotFound,
+  Collection: Collection,
+  CollectionLoadMore: CollectionLoadMore,
   SectionCustomTemplate: SectionCustomTemplate,
 };
 
@@ -99,6 +103,7 @@ export async function getStaticProps(context) {
     // route.id is actually content id. Route id for section but article id for article
     data = await components[template].getProps(context, route.id);
   }
+
   return {
     props: { menus: menus, route: route, data: data, template: template },
     revalidate: 1,

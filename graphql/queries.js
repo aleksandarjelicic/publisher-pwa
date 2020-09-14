@@ -22,6 +22,7 @@ query getArticle($articleId: Int) {
     lead
     paywall_secured
     published_at
+    updated_at
     slug
     title
     locale
@@ -79,12 +80,16 @@ query getArticle($articleId: Int) {
         swp_image {
           asset_id
           file_extension
+          width
+          height
         }
       }
       seo_og_media {
         swp_image {
           asset_id
           file_extension
+          width
+          height
         }
       }
       seo_twitter_media {
@@ -92,6 +97,8 @@ query getArticle($articleId: Int) {
         swp_image {
           asset_id
           file_extension
+          width
+          height
         }
       }
     }
@@ -156,22 +163,27 @@ export const GET_COLLECTION_QUERY = `
 `;
 
 export const GET_CONTENTLISTITEMS_QUERY = `
-  query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: String= "") {
-    list: swp_content_list(where: {name: {_ilike: $listName}, tenant_code: {_eq: $tenant_code}}) {
-      name
-      items: swp_content_list_items(limit: $limit, order_by: {position: desc}) {
-        article: swp_article {
-          comments_count
-          feature_media
-          lead
-          published_at
-          title
-          slug
-          swp_route {
-            staticprefix
-          }
+query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: String = "", $offset: Int = 0) {
+  list: swp_content_list(where: {name: {_ilike: $listName}, tenant_code: {_eq: $tenant_code}}) {
+    name
+    items: swp_content_list_items(limit: $limit, offset: $offset, order_by: {position: desc}) {
+      article: swp_article {
+        comments_count
+        feature_media
+        lead
+        published_at
+        title
+        slug
+        swp_route {
+          staticprefix
         }
       }
     }
+    metadata: swp_content_list_items_aggregate {
+      aggregate {
+        totalCount: count
+      }
+    }
   }
+}
 `;

@@ -1,5 +1,7 @@
 import { getArticle } from "../../../services/articleService";
 import React from "react";
+import { motion } from "framer-motion";
+import { pageTransitions } from "../../../config/framerMotionAnimations";
 import Store from "../../Store";
 
 class Content extends React.Component {
@@ -11,14 +13,18 @@ class Content extends React.Component {
     return (
       <Store.Consumer>
         {(store) => (
-          <div>
+          <motion.div
+            initial={pageTransitions.initial}
+            animate={pageTransitions.animate}
+            exit={pageTransitions.exit}
+          >
             <h1>{store.data.title}</h1>
             <div
               dangerouslySetInnerHTML={{
                 __html: store.data.body,
               }}
             ></div>
-          </div>
+          </motion.div>
         )}
       </Store.Consumer>
     );

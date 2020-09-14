@@ -1,0 +1,158 @@
+// // Flex grid
+// // Grid has equal columns, default setup is 'no wrap'
+// // ---------------------------------------------
+
+// @mixin flex($grow, $shrink, $basis) {
+//     -webkit-flex: $grow $shrink $basis;
+//         -ms-flex: $grow $shrink $basis;
+//             flex: $grow $shrink $basis;
+// }
+
+// $flex-grid-gap:          1rem; // space between items is $flex-grid-gap*2
+// $flex-grid-gap-small:    0.4rem; // alternative small gap
+// $flex-grid-box-bg:       white;
+// $flex-grid-columns:      6; // max number of columns supported
+
+// // map for media breakpoints, 'small' is mandatory and reserved as mobile first
+// $flex-grid-media: (
+//     medium: 40em,
+//     large: 60em,
+//     xlarge: 100em
+// );
+
+// // grid mixins
+// @mixin basic-grid {
+//     @for $i from $flex-grid-columns through 1 {
+//         &-#{$i} {
+//             .flex-grid__item {
+//                 @include flex(0, 0, 100% / $i);
+//                 max-width: 100% / $i;
+//             }
+//         }
+//     }
+// }
+// @mixin basic-grid-boxed {
+//     @for $i from $flex-grid-columns through 1 {
+//         &-#{$i} {
+//             .flex-grid__item {
+//                 @include flex(0, 0, calc(#{100% / $i} - #{$flex-grid-gap * 2}));
+//                 max-width: calc(#{100% / $i} - #{$flex-grid-gap * 2});
+//             }
+//         }
+//     }
+// }
+
+// @mixin basic-grid-boxed-small {
+//     @for $i from $flex-grid-columns through 1 {
+//         &-#{$i} {
+//             .flex-grid__item, .sd-check__wrapper, .btn, .toggle-button {
+//                 @include flex(0, 0, calc(#{100% / $i} - #{$flex-grid-gap-small * 2}));
+//                 max-width: calc(#{100% / $i} - #{$flex-grid-gap-small * 2});
+//             }
+//             .sd-check__wrapper {
+//                 display: flex;
+//                 .sd-checkbox.sd-checkbox--button-style {
+//                     display: flex;
+//                     flex-grow: 1;
+//                     label {
+//                         flex-grow: 1;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// // grid
+// .flex-grid {
+//     display: flex;
+//     flex-direction: row;
+//     overflow: hidden;
+//     overflow-x: auto;
+//     .flex-grid__item {
+//         position: relative;
+
+//         &--d-flex {
+//             display: flex;
+//         }
+//         &--column {
+//             flex-direction: column;
+//         }
+//     }
+//     &--wrap-items {
+//         flex-wrap: wrap;
+//     }
+//     &--content-center {
+//         justify-content: center;
+//     }
+//     &--grow {
+//         flex-grow: 1;
+//     }
+//     &--boxed {
+//         margin-left: -$flex-grid-gap;
+//         margin-right: -$flex-grid-gap;
+//         .flex-grid__item {
+//             margin: $flex-grid-gap;
+//             //background-color: $flex-grid-box-bg;
+//         }
+//     }
+
+//     &--boxed-small {
+//         margin-left: -$flex-grid-gap-small;
+//         margin-right: -$flex-grid-gap-small;
+//         .flex-grid__item, .sd-check__wrapper, .btn, .toggle-button {
+//             margin: $flex-grid-gap-small !important;
+//             //background-color: $flex-grid-box-bg;
+//         }
+//     }
+
+//     &--plain {
+//         .flex-grid__item {
+//             margin: $flex-grid-gap;
+//             padding: 0;
+//         }
+//     }
+    
+//     // default grid setup (mobile first), calc for 1-6 columns
+//     &--small {
+//         @include basic-grid;
+//     }
+
+//     &--boxed {
+//         &.flex-grid--small {
+//             @include basic-grid-boxed;
+//         }
+//     }
+//     &--boxed-small {
+//         &.flex-grid--small {
+//             @include basic-grid-boxed-small;
+//         }
+//     }
+//     &--padding {
+//         padding: 2rem;
+//     }
+//     &--scroll {
+//         overflow-y: auto;
+//     }
+// }
+
+// // Media queries
+// @each $name, $value in $flex-grid-media {
+//     @media only screen and (min-width: $value) {
+//         .flex-grid {
+//             &--#{$name} {
+//                 @include basic-grid;
+//             }
+//             &--boxed {
+//                 &.flex-grid--#{$name} {
+//                     @include basic-grid-boxed;
+//                 }
+//             }
+//             &--boxed-small {
+//                 &.flex-grid--#{$name} {
+//                     @include basic-grid-boxed-small;
+//                 }
+//             }
+//         }
+//     }
+// }

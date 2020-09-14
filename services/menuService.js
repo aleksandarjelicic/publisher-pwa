@@ -7,7 +7,10 @@ const tenant_code = process.env.NEXT_PUBLIC_TENANT_CODE;
 export const getMenus = () => {
   return request(api_url, GET_MENUS_QUERY, { tenant_code: tenant_code })
     .then((data) => data.swp_menu)
-    .catch((err) => []);
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
 };
 
 export const getMenuItems = (menus, name) => {

@@ -1,21 +1,20 @@
 import Head from "next/head";
+import { useAmp } from "next/amp";
 import moment from "moment";
 
 const media_url = process.env.NEXT_PUBLIC_MEDIA_URL;
+const domain = process.env.NEXT_PUBLIC_DOMAIN;
 const fallback_rendition_name = "1250x600";
 
-const ArticleHead = ({ data }) => {
+const ArticleHead = ({ data, route }) => {
+  const isAmp = useAmp();
   const title = data.title;
   const description =
     data.swp_article_seo_metadata &&
     data.swp_article_seo_metadata.meta_description
       ? data.swp_article_seo_metadata.meta_description
       : data.lead.replace(/<[^>]+>/g, "");
-  const url =
-    process.env.NEXT_PUBLIC_DOMAIN +
-    data.swp_route.staticprefix +
-    "/" +
-    data.slug;
+  const url = domain + data.swp_route.staticprefix + "/" + data.slug;
 
   let author = data.swp_article_authors.reduce(
     (acc, val, index) =>
@@ -52,7 +51,7 @@ const ArticleHead = ({ data }) => {
 
   if (!seo_image) {
     seo_image = {
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/default/social_media_share.jpg`,
+      url: `${domain}/default/social_media_share.jpg`,
       width: "1250",
       height: "600",
     };
@@ -175,6 +174,46 @@ const ArticleHead = ({ data }) => {
 
       {twitter_image ? (
         <meta name="twitter:image" content={twitter_image.url} />
+      ) : null}
+      {isAmp ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `{
+          "@context": "http://chema.org",
+          "@type": "NewsArticle",
+          "mainEntityOfPage": "${domain + route.incomingUri}",
+          "headline": "${title}",
+          "datePublished": "${moment(data.published_at).format(
+            "YYYY-MM-DD HH:mm:ss"
+          )}",
+          "dateModified": "${moment(data.updated_at).format(
+            "YYYY-MM-DD HH:mm:ss"
+          )}",
+          "description": "${description}",
+          "author": {
+            "@type": "Person",
+            "name": "${author}"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "${domain}/logo.png",
+              "width": 150,
+              "height": 66
+            },
+            "name": "${process.env.NEXT_PUBLIC_SITE_NAME}"
+          },
+            "image": {
+              "@type": "ImageObject",
+              "url": "${seo_image.url}",
+              "height": ${seo_image.height},
+              "width": ${seo_image.width}
+            }
+          }`,
+          }}
+        />
       ) : null}
     </Head>
   );

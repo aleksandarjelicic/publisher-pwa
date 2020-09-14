@@ -1,0 +1,31 @@
+.tabs {
+
+}
+
+.tabs__nav {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  li {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-right: 40px;
+    text-transform: uppercase;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+}
+
+.tabs__item {
+
+}
+
+.tabs__item--active {
+  padding-bottom: 10px;
+  border-bottom: 4px solid #333;
+}
+
+.tabs__content {
+
+}

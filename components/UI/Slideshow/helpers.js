@@ -28,6 +28,7 @@ export const prepareItems = (items, renditionName) => {
     if (!rendition) {
       rendition = item.swp_article_media.swp_image_renditions.find(rend => rend.name === "original");
     }
+    if (!rendition) return;
 
     let url = `${media_url}${rendition.swp_image.asset_id}.${rendition.swp_image.file_extension}`;
     if (rendition.swp_image.variants.includes("webp")) {

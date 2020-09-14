@@ -6,10 +6,11 @@ import Link from "next/link";
 
 const ActiveLink = ({ href, label }) => {
   const router = useRouter();
-  const indexOfQuestionMark = router.asPath.indexOf("?");
+  const indexOfPage = router.asPath.indexOf("/page");
+
   const asPath = router.asPath.substring(
     0,
-    indexOfQuestionMark !== -1 ? indexOfQuestionMark : router.asPath.length
+    indexOfPage !== -1 ? indexOfPage : router.asPath.length
   );
   const linkClassName = asPath === href ? "active" : "";
 
@@ -25,16 +26,18 @@ const Navigation = ({ menuName }) => {
   const menuItems = getMenuItems(store.menus, menuName);
 
   return (
-    <ul className="nav">
-      {menuItems.map((item, index) => (
-        <li key={menuName + "-" + index}>
-          <ActiveLink
-            href={item.swp_route ? item.swp_route.staticprefix : item.uri}
-            label={item.label}
-          />
-        </li>
-      ))}
-    </ul>
+    <nav className="nav">
+      <ul>
+        {menuItems.map((item, index) => (
+          <li key={menuName + "-" + index}>
+            <ActiveLink
+              href={item.swp_route ? item.swp_route.staticprefix : item.uri}
+              label={item.label}
+            />
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

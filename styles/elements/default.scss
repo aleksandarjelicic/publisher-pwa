@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+
+@import "_variables.scss";
+
+html {
+  font-size: 56%;
+
+  @include sm {
+    font-size: 62.5%;
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $fontRegular;
+  font-size: 1.6em;
+  font-weight: 400;
+  line-height: 1.4;
+  color: $colorDark;
+  padding-top: 0px;
+  background: #333333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $fontSerif;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2.5rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+a {
+  color: $colorDark;
+  text-decoration: none;
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+p {
+  color: $colorDark;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 169%;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+nav {
+  ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+input {
+  font-family: $fontSerif;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #777;
+  padding: 10px 20px;
+  margin: 0px;
+}

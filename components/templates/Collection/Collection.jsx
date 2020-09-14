@@ -1,5 +1,6 @@
-import React, { createRef } from "react";
-import Router from "next/router";
+import React from "react";
+import { motion } from "framer-motion";
+import { pageTransitions } from "../../../config/framerMotionAnimations";
 import Store from "../../Store";
 import { getCollectionItems } from "../../../services/collectionService";
 
@@ -10,54 +11,31 @@ import CollectionHead from "./CollectionHead";
 
 class Collection extends React.Component {
   static getProps = (context, routeId) => {
-    const page = context.params.page || 1;
+    const pageInSlugIndex = context.params.slug.indexOf("page");
+    const page =
+      pageInSlugIndex >= 0 ? context.params.slug[pageInSlugIndex + 1] : 1;
     return getCollectionItems(routeId, page).then((response) => response);
   };
-
-  state = {
-    isLoading: false,
-  };
-
-  componentDidMount() {
-    Router.events.on("routeChangeStart", this.startLoading);
-    Router.events.on("routeChangeComplete", this.stopLoading);
-  }
-
-  componentWillUnmount() {
-    Router.events.off("routeChangeStart", this.startLoading);
-    Router.events.off("routeChangeComplete", this.stopLoading);
-  }
-
-  startLoading = () => {
-    this.setState({ isLoading: true });
-  };
-  stopLoading = () => {
-    this.setState({ isLoading: false });
-  };
-
-  // used to scroll to top of list when page changes
-  listTopRef = createRef(null);
 
   render() {
     return (
       <Store.Consumer>
         {(store) => (
-          <div>
+          <motion.div
+            initial={pageTransitions.initial}
+            animate={pageTransitions.animate}
+            exit={pageTransitions.exit}
+          >
             <CollectionHead data={store} />
             <div className="grid">
-              <div className="grid-element" ref={this.listTopRef}>
-                {this.state.isLoading ? (
-                  <div>loading...</div>
-                ) : (
-                  <Listing items={store.data.items} />
-                )}
+              <div className="grid-element">
+                <Listing items={store.data.items} />
               </div>
               <div className="grid-element grid-element-small">
                 <Sidebar />
               </div>
             </div>
             <Pagination
-              listTopRef={this.listTopRef}
               currentPage={
                 store.data.metadata
                   ? store.data.metadata.aggregate.currentPage
@@ -69,7 +47,7 @@ class Collection extends React.Component {
                   : 0
               }
             />
-          </div>
+          </motion.div>
         )}
       </Store.Consumer>
     );

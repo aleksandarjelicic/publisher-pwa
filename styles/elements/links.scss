@@ -1,0 +1,19 @@
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-left: 0px;
+  list-style: none;
+  li {
+    margin-right: 20px;
+    a {
+      display: flex;
+      align-items: center;
+      img {
+        width: 24px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

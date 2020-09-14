@@ -1,0 +1,52 @@
+.head {
+  margin: 0px -10px;
+  @include sm {
+    margin: 0px;
+  }
+}
+
+.head__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+}
+
+.head__topLeft {
+  margin-top: 10px;
+}
+
+.head__topRight {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  p {
+    font-family: $fontSerif;
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-right: 20px;
+    margin-bottom: 0px;
+  }
+}
+
+.head__middle {
+
+}
+
+.head__logo {
+  display: block;
+  width: 164px;
+}
+
+.head__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+  .links {
+    li:last-child {
+      margin-right: 0px;
+    }
+  }
+}

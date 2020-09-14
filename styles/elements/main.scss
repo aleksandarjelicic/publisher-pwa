@@ -1,0 +1,22 @@
+.main {
+
+}
+
+.mainCols {
+  display: flex;
+  flex-direction: column;
+  @include lg {
+    flex-direction: row;
+  }
+}
+
+.main--left {
+  flex: 1 1 auto;
+}
+
+.main--right {
+  flex: 0 0 300px;
+  @include lg {
+    margin-left: 50px;
+  }
+}

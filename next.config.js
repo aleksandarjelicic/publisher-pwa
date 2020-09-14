@@ -11,4 +11,16 @@ module.exports = withPWA({
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/news-sitemap.xml',
+        destination: '/api/news-sitemap',
+      },
+      {
+        source: '/sitemaps/sitemap-today.xml',
+        destination: '/api/sitemap-today',
+      }
+    ]
+  }
 })

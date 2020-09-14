@@ -1,0 +1,4 @@
+Sitemap: https://publisherpwa.org/sitemap.xml
+
+User-agent: *
+Allow: /*

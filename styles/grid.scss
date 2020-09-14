@@ -1,0 +1,11 @@
+.grid {
+  display: flex;
+  flex-direction: row;
+}
+.grid .grid-element {
+  flex: 1;
+  padding: 2rem;
+}
+.grid .grid-element-small {
+  flex: 0.2;
+}

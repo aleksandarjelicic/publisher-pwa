@@ -1,0 +1,110 @@
+.hero {
+  position: relative;
+  margin-bottom: 30px;
+  .hero__img {
+    &:after {
+      display: none;
+      @include md {
+        display: block;
+      }
+    }
+  }
+}
+
+.hero__img {
+  position: relative;
+  margin-bottom: 20px;
+  @include md {
+    margin-bottom: 0px;
+  }
+  &:after {
+    position: absolute;
+    display: block;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-image: -webkit-linear-gradient(78deg, rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.15) 52%,rgba(0,0,0,0) 70%);
+    background-image: -o-linear-gradient(78deg, rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.15) 52%,rgba(0,0,0,0) 70%);
+    background-image: linear-gradient(12deg, rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.15) 52%,rgba(0,0,0,0) 70%);
+  }
+}
+
+.hero__text {
+  position: relative;
+  max-width: 630px;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  @include md {
+    position: absolute;
+    margin-left: 0px;
+    left: 20px;
+    bottom: 20px;
+  }
+  * {
+    color: $colorDark;
+    @include md {
+      color: $colorWhite;
+    }
+  }
+}
+
+.hero__kicker {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.hero__hdl {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.hero__lead {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.hero--cover {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.hero__text--cover {
+  margin-left: 30px;
+  @include md {
+    left: 40px;
+    bottom: 40px;
+  }
+}
+
+.hero__hdl--cover {
+  font-size: 3.4rem;
+}
+
+.hero--small {
+  .hero__img {
+    &:after {
+      display: block;
+    }
+  }
+}
+
+.hero__text--small {
+    position: absolute;
+    margin-left: 0px;
+    left: 20px;
+    bottom: 20px;
+    * {
+      color: $colorWhite;
+  }
+}
+
+.hero__hdl--small {
+  font-size: 2.2rem;
+  font-style: italic;
+}

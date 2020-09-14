@@ -33,8 +33,12 @@ export const matchRoute = async (slug, context) => {
       }
     }
   }
-
   `;
+
+  const pageInSlugIndex = slug.indexOf('page');
+  if (pageInSlugIndex >= 0) {
+    slug = slug.slice(0, pageInSlugIndex);
+  }
 
   let url = "/" + slug.join("/");
   let urlNoSlug =

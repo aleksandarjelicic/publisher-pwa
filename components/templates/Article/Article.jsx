@@ -1,21 +1,31 @@
-import ArticleHead from "./ArticleHead";
-import { getArticle } from "../../../services/articleService";
 import React from "react";
+import { motion } from "framer-motion";
+import { getArticle } from "../../../services/articleService";
+import { convertBodyImages } from "../../../services/articleBodyService";
 import Store from "../../Store";
 
+import ArticleHead from "./ArticleHead";
 import Image from "../../UI/Image";
 import Slideshow from "../../UI/Slideshow";
 
+import { pageTransitions } from "../../../config/framerMotionAnimations";
+
 class Article extends React.Component {
   static getProps = (context, articleId) => {
-    return getArticle(articleId).then((response) => response);
+    return getArticle(articleId).then((response) => {
+      return { ...response, body: convertBodyImages(response.body) };
+    });
   };
 
   render() {
     return (
       <Store.Consumer>
         {(store) => (
-          <div>
+          <motion.div
+            initial={pageTransitions.initial}
+            animate={pageTransitions.animate}
+            exit={pageTransitions.exit}
+          >
             <ArticleHead data={store.data} />
             <h1>{store.data.title}</h1>
             {store.data.swp_article_feature_media && (
@@ -63,7 +73,7 @@ class Article extends React.Component {
                   />
                 ))
               : null}
-          </div>
+          </motion.div>
         )}
       </Store.Consumer>
     );

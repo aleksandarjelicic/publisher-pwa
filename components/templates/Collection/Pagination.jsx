@@ -1,16 +1,26 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
 
-const Pagination = ({ currentPage, totalPages, listTopRef = null }) => {
+const Pagination = ({ currentPage, totalPages }) => {
   const router = useRouter();
   const paginationHandler = (page) => {
-    const as = page.selected
-      ? "/" + router.query.slug.join("/") + "?page=" + (page.selected + 1)
-      : "/" + router.query.slug.join("/");
+    let slug = router.query.slug;
+    const pageInSlugIndex = slug.indexOf("page");
+    if (pageInSlugIndex >= 0) {
+      slug = slug.slice(0, pageInSlugIndex);
+    }
 
-    router.push(router.pathname + "?page=" + (page.selected + 1), as);
-    if (listTopRef) listTopRef.current.scrollIntoView();
+    const as = page.selected
+      ? "/" + slug.join("/") + "/page/" + (page.selected + 1)
+      : "/" + slug.join("/");
+    const path = page.selected
+      ? router.pathname + "/page/" + (page.selected + 1)
+      : router.pathname;
+
+    router.push(path, as);
   };
+
+  if (totalPages < 2) return null;
 
   return (
     <div>

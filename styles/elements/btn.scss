@@ -1,0 +1,25 @@
+@import "_variables.scss";
+
+.btn {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  border: 1px solid #333;
+  border-radius: 2px;
+  &:hover {
+    opacity: 0.9;
+  }
+  &--color {
+    color: $colorWhite;
+    background: #f45555;
+    border: 1px solid #f45555;
+  }
+}
+
+.btnLink {
+  display: inline-block;
+  font-family: $fontSerif;
+  font-size: 1.5rem;
+  font-style: italic;
+}
