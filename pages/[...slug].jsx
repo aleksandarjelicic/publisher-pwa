@@ -68,11 +68,13 @@ export async function getStaticProps(context) {
 
   if (
     route.type === "collection" &&
-    route.template_name === default_collection_template
+    (!route.template_name ||
+      route.template_name === default_collection_template)
   ) {
     template = "Collection";
   } else if (
     route.type === "collection" &&
+    route.template_name &&
     route.template_name !== default_collection_template
   ) {
     template = route.template_name;
@@ -82,12 +84,14 @@ export async function getStaticProps(context) {
     template = route.template_name;
   } else if (
     route.type === "article" &&
-    route.swp_route.articles_template_name === default_article_template
+    (!route.swp_route.articles_template_name ||
+      route.swp_route.articles_template_name === default_article_template)
   ) {
     template = "Article";
     if (_isAmp) template = "ArticleAMP";
   } else if (
     route.type === "article" &&
+    route.swp_route.articles_template_name &&
     route.swp_route.articles_template_name !== default_article_template
   ) {
     template = route.swp_route.articles_template_name;

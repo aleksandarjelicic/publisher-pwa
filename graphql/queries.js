@@ -155,6 +155,9 @@ export const GET_COLLECTION_QUERY = `
           }
         }
       }
+      swp_slideshows {
+        id
+      }
       swp_route {
         staticprefix
       }
@@ -166,14 +169,36 @@ export const GET_CONTENTLISTITEMS_QUERY = `
 query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: String = "", $offset: Int = 0) {
   list: swp_content_list(where: {name: {_ilike: $listName}, tenant_code: {_eq: $tenant_code}}) {
     name
-    items: swp_content_list_items(limit: $limit, offset: $offset, order_by: {position: desc}) {
+    items: swp_content_list_items(limit: $limit, offset: $offset, order_by: {position: asc}) {
       article: swp_article {
         comments_count
-        feature_media
         lead
         published_at
         title
         slug
+        swp_article_authors {
+          swp_author {
+            name
+            role
+            avatar_url
+          }
+        }
+        swp_article_feature_media {
+          renditions: swp_image_renditions {
+            name
+            width
+            height
+            image: swp_image {
+              asset_id
+              file_extension
+              variants
+
+            }
+          }
+        }
+        swp_slideshows {
+          id
+        }
         swp_route {
           staticprefix
         }

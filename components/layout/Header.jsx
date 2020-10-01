@@ -1,4 +1,5 @@
 import Navigation from "./Navigation";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -23,9 +24,11 @@ const Header = () => {
           </div>
         </div>
         <div className="head__middle">
-          <a href="#" className="head__logo">
-            <img src="img/logo.svg" width="164" alt="" />
-          </a>
+          <Link href="/">
+            <a className="head__logo">
+              <img src="/img/logo.svg" width="164" alt="" />
+            </a>
+          </Link>
         </div>
         <div className="head__bottom">
           <Navigation menuName="mainNavigation" />
@@ -33,12 +36,12 @@ const Header = () => {
             <ul className="links links--icon">
               <li>
                 <a href="#">
-                  <img src="img/icon-search.svg" alt="" /> Search
+                  <img src="/img/icon-search.svg" alt="" /> Search
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="img/icon-login.svg" alt="" /> Login
+                  <img src="/img/icon-login.svg" alt="" /> Login
                 </a>
               </li>
             </ul>
