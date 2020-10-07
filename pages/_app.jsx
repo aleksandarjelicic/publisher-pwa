@@ -13,6 +13,10 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (gtag.GA_TRACKING_ID) {
+      // initial load
+      gtag.pageview(router.asPath);
+
+      // route change
       const handleRouteChange = (url) => {
         gtag.pageview(url);
       };

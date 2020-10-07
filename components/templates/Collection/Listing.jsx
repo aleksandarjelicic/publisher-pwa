@@ -1,12 +1,15 @@
-import Item from "./Item";
+import ArticleHero from "../../UI/Articles/ArticleHero";
+import ArticleList from "../../UI/Articles/ArticleList";
 
 const Listing = ({ items }) => {
   return (
-    <div>
+    <>
       {items.map((item, index) => {
-        return <Item key={item.slug + "-" + index} item={item} />;
+        if (index === 0)
+          return <ArticleHero article={item} key={item.slug + "-" + index} />;
+        return <ArticleList article={item} key={item.slug + "-" + index} />;
       })}
-    </div>
+    </>
   );
 };
 

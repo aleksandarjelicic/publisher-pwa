@@ -3,7 +3,7 @@ import Image from "../Image";
 
 const ArticleHero = ({ article }) => {
   const href = article.swp_route.staticprefix + "/" + article.slug;
-
+  const gallery = article.swp_slideshows.length ? true : false;
   return (
     <article className="hero">
       <Link href="/[...slug]" as={href}>
@@ -22,7 +22,13 @@ const ArticleHero = ({ article }) => {
               className="hero__img"
             />
           )}
-
+          {gallery ? (
+            <img
+              className="icon icon--hero"
+              src="img/icon-gallery.svg"
+              alt=""
+            />
+          ) : null}
           <div className="hero__text">
             {/* <span className="hero__kicker">Gilets jaunes movement</span> */}
             <h2 className="hero__hdl">{article.title}</h2>

@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import { getStaticProps } from "../../pages";
 
 const BaseLayout = ({ children }) => (
   <div className="container">

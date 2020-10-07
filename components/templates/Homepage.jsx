@@ -1,6 +1,6 @@
+import React from "react";
 import { getContentList } from "../../services/contentListService";
 import { getCollectionItems } from "../../services/collectionService";
-import React from "react";
 import { motion } from "framer-motion";
 import Store from "../Store";
 import { pageTransitions } from "../../config/framerMotionAnimations";
@@ -11,7 +11,7 @@ import ArticleHeroSmall from "../UI/Articles/ArticleHeroSmall";
 import ArticleList from "../UI/Articles/ArticleList";
 import SectionTopic from "../UI/Sections/SectionTopic";
 import SectionMost from "../UI/Sections/SectionMost";
-import SectionSmall from "../UI/Sections/SectionSmall";
+import SectionSide from "../UI/Sections/SectionSide";
 import SectionThree from "../UI/Sections/SectionThree";
 import SectionTwo from "../UI/Sections/SectionTwo";
 import Ad from "../UI/Ads/Ad";
@@ -25,6 +25,7 @@ class Homepage extends React.Component {
     const business = await getCollectionItems(393, 1, 3);
     const travel = await getCollectionItems(394, 1, 2);
     const sports = await getCollectionItems(395, 1, 3);
+    const opinion = await getCollectionItems(393, 1, 6);
 
     return {
       topnews: topnews,
@@ -34,6 +35,7 @@ class Homepage extends React.Component {
       business: business,
       travel: travel,
       sports: sports,
+      opinion: opinion,
     };
   };
 
@@ -82,9 +84,10 @@ class Homepage extends React.Component {
                 </div>
                 <div className="main--right">
                   <SectionMost />
-                  <SectionSmall />
-                  <Ad />
-                  {/* <ArticleHeroSmall /> */}
+                  <SectionSide
+                    articles={store.data.opinion.items}
+                    name="Opinions"
+                  />
                 </div>
               </div>
               <div className="mainCols">

@@ -10,7 +10,6 @@ const Slideshow = ({
   options = {},
   slideshowId = "glide",
 }) => {
-  if (!width || !height || typeof window === "undefined") return null;
   const track = useRef();
   const [slider, setSlider] = useState(new Glide(`.${slideshowId}`, options));
   const [galleryItems, setGalleryItems] = useState([]);

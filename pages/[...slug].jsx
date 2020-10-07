@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAmp } from "next/amp";
 import { getMenus } from "../services/menuService";
 import { matchRoute } from "../services/routeMatcherService";
+import { sendPageView } from "../services/publisherAnalytics";
 import Store from "../components/Store";
 
 import Article from "../components/templates/Article/Article";
 import ArticleAMP from "../components/templates/Article/amp/ArticleAMP";
 import Collection from "../components/templates/Collection/Collection";
-import CollectionLoadMore from "../components/templates/Collection/CollectionLoadMore";
 import Content from "../components/templates/Content/Content";
 import NotFound from "../components/templates/NotFound";
 import SectionCustomTemplate from "../components/templates/Collection/SectionCustomTemplate";
@@ -29,7 +29,6 @@ const components = {
   Author: Author,
   NotFound: NotFound,
   Collection: Collection,
-  CollectionLoadMore: CollectionLoadMore,
   SectionCustomTemplate: SectionCustomTemplate,
 };
 
@@ -44,6 +43,12 @@ const renderer = (templateName) => {
 
 const Pages = (props) => {
   const isAmp = useAmp();
+
+  useEffect(() => {
+    // publisher page views counter integration
+    if (props.route.type === "article") sendPageView(props.route.id);
+  }, [props.route]);
+
   return (
     <Store.Provider value={{ ...props }}>
       {isAmp ? (
@@ -104,7 +109,7 @@ export async function getStaticProps(context) {
     typeof components[template] !== "undefined" &&
     typeof components[template].getProps !== "undefined"
   ) {
-    // route.id is actually content id. Route id for section but article id for article
+    // route.id is actually content id. Route.id for section but article.id for article
     data = await components[template].getProps(context, route.id);
   }
 
