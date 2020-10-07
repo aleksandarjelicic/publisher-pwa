@@ -18,19 +18,30 @@ class Collection extends React.Component {
     return getCollectionItems(routeId, page, 2).then((response) => response);
   };
 
-  constructor(props, context) {
-    super(props, context);
+  state = {
+    routeId: this.context.route.id,
+    items: this.context.data.items,
+    currentPage: this.context.data.metadata.aggregate.currentPage,
+    pagesCount: this.context.data.metadata.aggregate.pagesCount || 0,
+    showLoadMore: this.context.data.metadata.aggregate.pagesCount
+      ? true
+      : false,
+    loading: false,
+  };
 
-    this.state = {
-      routeId: this.context.route.id,
-      items: this.context.data.items,
-      currentPage: this.context.data.metadata.aggregate.currentPage,
-      pagesCount: this.context.data.metadata.aggregate.pagesCount || 0,
-      showLoadMore: this.context.data.metadata.aggregate.pagesCount
-        ? true
-        : false,
-      loading: false,
-    };
+  componentDidUpdate() {
+    if (this.context.route.id !== this.state.routeId) {
+      this.setState({
+        routeId: this.context.route.id,
+        items: this.context.data.items,
+        currentPage: this.context.data.metadata.aggregate.currentPage,
+        pagesCount: this.context.data.metadata.aggregate.pagesCount || 0,
+        showLoadMore: this.context.data.metadata.aggregate.pagesCount
+          ? true
+          : false,
+        loading: false,
+      });
+    }
   }
 
   loadMore = async () => {
