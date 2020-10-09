@@ -70,6 +70,7 @@ class Article extends React.Component {
                     ]}
                     width={960}
                     height={480}
+                    options={{ bound: true }}
                   />
                 ))
               : null}
