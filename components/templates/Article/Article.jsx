@@ -46,8 +46,8 @@ class Article extends React.Component {
                   <div className="article__info">
                     <div className="article__meta">
                       <time
-                        class="article__time"
-                        datetime="2020-06-28 14:20:00"
+                        className="article__time"
+                        dateTime="2020-06-28 14:20:00"
                       >
                         28 June 2020
                       </time>

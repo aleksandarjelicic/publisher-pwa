@@ -49,9 +49,12 @@ function addTodaySitemapToIndex() {
 
 const GET_ARTICLES_QUERY = `
 query MyQuery($currentDay: timestamp = "",$tenant_code: String = "") {
-  articles: swp_article(where: {published_at: {_lte: $currentDay}, tenant_code: {_eq: $tenant_code}}, order_by: {published_at: asc}) {
+  articles: swp_article(where: {published_at: {_is_null: false, _lte: $currentDay}, tenant_code: {_eq: $tenant_code}}, order_by: {published_at: asc}) {
     slug
     updated_at
+    swp_route {
+      staticprefix
+    }
   }
 }
 `;
@@ -77,7 +80,7 @@ query MyQuery($currentDay: timestamp = "",$tenant_code: String = "") {
         const path = `./public/sitemaps/sitemap-${i}.xml.gz`;
         const publicPath = `/sitemaps/sitemap-${i}.xml.gz`
         sitemapStream
-          .pipe(createGzip()) // compress the output of the sitemap
+          // .pipe(createGzip()) // compress the output of the sitemap
           .pipe(createWriteStream(resolve(path))); // write it to sitemap-NUMBER.xml
 
         return [
@@ -92,7 +95,7 @@ query MyQuery($currentDay: timestamp = "",$tenant_code: String = "") {
 
     result.articles.forEach(article => {
       sms.write({
-        url: `${domain}/${article.slug}`,
+        url: `${domain}${article.swp_route.staticprefix}/${article.slug}`,
         changefreq: 'daily',
         priority: 0.8,
         lastmod: article.updated_at + "Z"
@@ -100,7 +103,9 @@ query MyQuery($currentDay: timestamp = "",$tenant_code: String = "") {
     });
     sms.end();
     console.log("sitemaps: 2. Created");
-    streamToPromise(sms).then(addTodaySitemapToIndex)
+    streamToPromise(sms).then(() => {
+      setTimeout(addTodaySitemapToIndex, 1500);
+    })
   } catch (e) {
     console.error(e);
   }

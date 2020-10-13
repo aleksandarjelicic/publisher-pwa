@@ -8,7 +8,7 @@ export default class SiteDocument extends Document {
         <Head>
           {
             /* Global Site Tag (gtag.js) - Google Analytics */
-            GA_TRACKING_ID ? (
+            GA_TRACKING_ID && !this.props.inAmpMode ? (
               <>
                 <script
                   async
@@ -29,9 +29,38 @@ export default class SiteDocument extends Document {
               </>
             ) : null
           }
+          {
+            /*  AMP google analytics */
+            GA_TRACKING_ID && this.props.inAmpMode ? (
+              <>
+                <script
+                  async
+                  custom-element="amp-analytics"
+                  src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+                ></script>
+              </>
+            ) : null
+          }
         </Head>
         <body>
           <Main />
+          {
+            /*  AMP google analytics */
+            GA_TRACKING_ID && this.props.inAmpMode ? (
+              <amp-analytics type="gtag">
+                <script
+                  type="application/json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      vars: {
+                        gtag_id: GA_TRACKING_ID,
+                      },
+                    }),
+                  }}
+                />
+              </amp-analytics>
+            ) : null
+          }
           <NextScript />
         </body>
       </Html>

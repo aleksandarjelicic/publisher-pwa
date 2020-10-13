@@ -6,6 +6,7 @@
 NEXT_PUBLIC_API_URL=http://hasura.com/v1/graphql
 NEXT_PUBLIC_TENANT_CODE=a1hrzi
 NEXT_PUBLIC_MEDIA_URL=https://sourcefabric.org/uploads/swp/0gjdk8/media/
+NEXT_PUBLIC_PUBLISHER_ANALYTICS_ENDPOINT=https://sourcefabric.org/_swp_analytics
 # used for title meta tag
 NEXT_PUBLIC_SITE_NAME=Publisher PWA
 NEXT_PUBLIC_DOMAIN=https://publisherpwa.org

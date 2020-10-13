@@ -3,6 +3,7 @@ import { useAmp } from "next/amp";
 import { getMenus } from "../services/menuService";
 import { matchRoute } from "../services/routeMatcherService";
 import { sendPageView } from "../services/publisherAnalytics";
+import { getPaths } from "../services/buildService";
 import Store from "../components/Store";
 
 import Article from "../components/templates/Article/Article";
@@ -109,7 +110,7 @@ export async function getStaticProps(context) {
     typeof components[template] !== "undefined" &&
     typeof components[template].getProps !== "undefined"
   ) {
-    // route.id is actually content id. Route.id for section but article.id for article
+    // route.id is actually content id. It is route.id for section but article.id for article
     data = await components[template].getProps(context, route.id);
   }
 
@@ -119,9 +120,12 @@ export async function getStaticProps(context) {
   };
 }
 
+// getting paths to prerender articles html/json on build
 export async function getStaticPaths() {
+  const paths = await getPaths();
+
   return {
-    paths: [],
+    paths: paths,
     fallback: "unstable_blocking",
   };
 }

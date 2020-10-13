@@ -40,15 +40,15 @@ const ArticleHead = ({ data, route }) => {
     let fallbackImage = data.swp_article_feature_media.renditions.find(
       (rendition) => rendition.name === fallback_rendition_name
     );
+
     if (fallbackImage) {
       seo_image = {
         url: `${media_url}${fallbackImage.image.asset_id}.${fallbackImage.image.file_extension}`,
-        width: fallbackImage.image.width,
-        height: fallbackImage.image.height,
+        width: fallbackImage.width,
+        height: fallbackImage.height,
       };
     }
   }
-
   if (!seo_image) {
     seo_image = {
       url: `${domain}/default/social_media_share.jpg`,
@@ -183,14 +183,14 @@ const ArticleHead = ({ data, route }) => {
           "@context": "http://chema.org",
           "@type": "NewsArticle",
           "mainEntityOfPage": "${domain + route.incomingUri}",
-          "headline": "${title}",
+          "headline": "${title.replace(/"/g, "&quot;")}",
           "datePublished": "${moment(data.published_at).format(
             "YYYY-MM-DD HH:mm:ss"
           )}",
           "dateModified": "${moment(data.updated_at).format(
             "YYYY-MM-DD HH:mm:ss"
           )}",
-          "description": "${description}",
+          "description": "${description.replace(/"/g, "&quot;")}",
           "author": {
             "@type": "Person",
             "name": "${author}"
