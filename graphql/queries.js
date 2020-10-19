@@ -35,6 +35,7 @@ query getArticle($articleId: Int) {
         name
         role
         avatar_url
+        slug
       }
     }
     swp_article_feature_media {
@@ -67,6 +68,12 @@ query getArticle($articleId: Int) {
             }
           }
         }
+      }
+    }
+    swp_article_keywords {
+      swp_keyword {
+        name
+        slug
       }
     }
     swp_article_seo_metadata {
@@ -122,7 +129,7 @@ query getAuthor($slug: String = "") {
 `;
 
 export const GET_COLLECTION_QUERY = `
-  query getArticles($tenant_code: String = "", $routeId: Int, $limit: Int = 10, $offset: Int = 10) {
+  query getArticles($tenant_code: String = "", $routeId: Int, $limit: Int = 10, $offset: Int = 0) {
     metadata: swp_article_aggregate(where: {tenant_code: {_eq: $tenant_code}, route_id: {_eq: $routeId}}) {
       aggregate {
         totalCount: count
@@ -140,6 +147,7 @@ export const GET_COLLECTION_QUERY = `
           name
           role
           avatar_url
+          slug
         }
       }
       swp_article_feature_media {
@@ -165,6 +173,106 @@ export const GET_COLLECTION_QUERY = `
   }
 `;
 
+
+export const GET_COLLECTION_BY_TAG_QUERY = `
+  query getArticles($tenant_code: String = "", $tagSlug: String = "", $limit: Int = 10, $offset: Int = 0) {
+    tag: swp_keyword(where: {slug: {_eq: $tagSlug}}) {
+      name
+      slug
+    }
+    metadata: swp_article_aggregate(where: {tenant_code: {_eq: $tenant_code}, swp_article_keywords: {swp_keyword: {slug: {_eq: $tagSlug}}}}) {
+      aggregate {
+        totalCount: count
+      }
+    }
+    items: swp_article(limit: $limit, offset: $offset, order_by: {published_at: desc}, where: {tenant_code: {_eq: $tenant_code}, swp_article_keywords: {swp_keyword: {slug: {_eq: $tagSlug}}}}) {
+      comments_count
+      lead
+      paywall_secured
+      published_at
+      slug
+      title
+      swp_article_authors {
+        swp_author {
+          name
+          role
+          avatar_url
+          slug
+        }
+      }
+      swp_article_feature_media {
+        renditions: swp_image_renditions {
+          name
+          width
+          height
+          image: swp_image {
+            asset_id
+            file_extension
+            variants
+
+          }
+        }
+      }
+      swp_slideshows {
+        id
+      }
+      swp_route {
+        staticprefix
+      }
+    }
+  }
+`;
+
+export const GET_COLLECTION_BY_AUTHOR_QUERY = `
+  query getArticles($tenant_code: String = "", $authorSlug: String = "", $limit: Int = 10, $offset: Int = 0) {
+    tag: swp_keyword(where: {slug: {_eq: $tagSlug}}) {
+      name
+      slug
+    }
+    metadata: swp_article_aggregate(where: {tenant_code: {_eq: $tenant_code}, swp_article_authors: {swp_author: {slug: {_eq: $authorSlug}}}}) {
+      aggregate {
+        totalCount: count
+      }
+    }
+    items: swp_article(limit: $limit, offset: $offset, order_by: {published_at: desc}, where: {tenant_code: {_eq: $tenant_code}, swp_article_authors: {swp_author: {slug: {_eq: $authorSlug}}}}) {
+      comments_count
+      lead
+      paywall_secured
+      published_at
+      slug
+      title
+      swp_article_authors {
+        swp_author {
+          name
+          role
+          avatar_url
+          slug
+        }
+      }
+      swp_article_feature_media {
+        renditions: swp_image_renditions {
+          name
+          width
+          height
+          image: swp_image {
+            asset_id
+            file_extension
+            variants
+
+          }
+        }
+      }
+      swp_slideshows {
+        id
+      }
+      swp_route {
+        staticprefix
+      }
+    }
+  }
+`;
+
+
 export const GET_CONTENTLISTITEMS_QUERY = `
 query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: String = "", $offset: Int = 0) {
   list: swp_content_list(where: {name: {_ilike: $listName}, tenant_code: {_eq: $tenant_code}}) {
@@ -181,6 +289,7 @@ query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: Stri
             name
             role
             avatar_url
+            slug
           }
         }
         swp_article_feature_media {

@@ -13,6 +13,7 @@ import Content from "../components/templates/Content/Content";
 import NotFound from "../components/templates/NotFound";
 import SectionCustomTemplate from "../components/templates/Collection/SectionCustomTemplate";
 import Author from "../components/templates/Author";
+import Tag from "../components/templates/Collection/Tag";
 
 import BaseLayout from "../components/layout/BaseLayout";
 
@@ -31,6 +32,7 @@ const components = {
   NotFound: NotFound,
   Collection: Collection,
   SectionCustomTemplate: SectionCustomTemplate,
+  Tag: Tag,
 };
 
 const renderer = (templateName) => {

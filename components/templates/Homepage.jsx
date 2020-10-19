@@ -1,13 +1,12 @@
 import React from "react";
 import { getContentList } from "../../services/contentListService";
-import { getCollectionItems } from "../../services/collectionService";
+import { getCollectionByRoute } from "../../services/collectionService";
 import { motion } from "framer-motion";
 import Store from "../Store";
 import { pageTransitions } from "../../config/framerMotionAnimations";
 import UniversalHead from "../layout/UniversalHead";
 import ArticleHeroCover from "../UI/Articles/ArticleHeroCover";
 import ArticleHero from "../UI/Articles/ArticleHero";
-import ArticleHeroSmall from "../UI/Articles/ArticleHeroSmall";
 import ArticleList from "../UI/Articles/ArticleList";
 import SectionTopic from "../UI/Sections/SectionTopic";
 import SectionMost from "../UI/Sections/SectionMost";
@@ -21,11 +20,11 @@ class Homepage extends React.Component {
     const topnews = await getContentList("Top news", 1, 7);
     const coronavirus = await getContentList("Coronavirus", 1, 3);
     const bottom = await getContentList("bottom", 1, 1);
-    const politics = await getCollectionItems(397, 1, 3);
-    const business = await getCollectionItems(393, 1, 3);
-    const travel = await getCollectionItems(394, 1, 2);
-    const sports = await getCollectionItems(395, 1, 3);
-    const opinion = await getCollectionItems(393, 1, 6);
+    const politics = await getCollectionByRoute(397, 1, 3);
+    const business = await getCollectionByRoute(393, 1, 3);
+    const travel = await getCollectionByRoute(394, 1, 2);
+    const sports = await getCollectionByRoute(395, 1, 3);
+    const opinion = await getCollectionByRoute(393, 1, 6);
 
     return {
       topnews: topnews,
@@ -79,7 +78,7 @@ class Homepage extends React.Component {
                   <SectionTopic
                     articles={store.data.coronavirus.items}
                     name="Corona virus"
-                    moreUrl="/coronavirus"
+                    moreUrl="/tag/coronavirus"
                   />
                 </div>
                 <div className="main--right">

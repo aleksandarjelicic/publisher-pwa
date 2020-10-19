@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { getArticle } from "../../../services/articleService";
 import { convertBodyImages } from "../../../services/articleBodyService";
@@ -7,6 +8,8 @@ import Store from "../../Store";
 import ArticleHead from "./ArticleHead";
 import Image from "../../UI/Image";
 import Slideshow from "../../UI/Slideshow";
+import AuthorsList from "../../UI/AuthorsList";
+import Time from "../../UI/Time";
 
 import SectionMost from "../../UI/Sections/SectionMost";
 
@@ -34,37 +37,18 @@ class Article extends React.Component {
               <div className="main--left">
                 <article className="article__full">
                   <ArticleHead data={store.data} />
-                  <span className="article__kicker">
+                  {/* <span className="article__kicker">
                     Gilets jaunes movement
-                  </span>
+                  </span> */}
                   <h1 className="article__headline">{store.data.title}</h1>
-                  <p className="article__lead">
-                    Public sector workers in France continue to bring
-                    transportation in the country to a virtual standstill as
-                    they protest pension reforms.
-                  </p>
+                  <p className="article__lead">{store.data.lead}</p>
                   <div className="article__info">
                     <div className="article__meta">
-                      <time
-                        className="article__time"
-                        dateTime="2020-06-28 14:20:00"
-                      >
-                        28 June 2020
-                      </time>
-                      {store.data.swp_article_authors &&
-                      store.data.swp_article_authors.length ? (
-                        <React.Fragment>
-                          {store.data.swp_article_authors.map((item, index) => (
-                            <span
-                              className="article__author"
-                              key={"author" + index}
-                            >
-                              {" "}
-                              {item.swp_author.name}
-                            </span>
-                          ))}
-                        </React.Fragment>
-                      ) : null}
+                      <Time value={store.data.published_at} />
+                      <AuthorsList
+                        className="article__author"
+                        authors={store.data.swp_article_authors}
+                      />
                     </div>
 
                     <div className="article__social">Social Icons</div>
@@ -109,26 +93,24 @@ class Article extends React.Component {
                         />
                       ))
                     : null}
-                  <div className="tags">
-                    <h4 className="tags__hdl">Tags</h4>
-                    <ul className="tag__items">
-                      <li className="tag__item">
-                        <a href="#">France</a>
-                      </li>
-                      <li className="tag__item">
-                        <a href="#">Gilets jaunes</a>
-                      </li>
-                      <li className="tag__item">
-                        <a href="#">EU</a>
-                      </li>
-                      <li className="tag__item">
-                        <a href="#">Strike</a>
-                      </li>
-                      <li className="tag__item">
-                        <a href="#">Protests in France</a>
-                      </li>
-                    </ul>
-                  </div>
+
+                  {store.data.swp_article_keywords.length ? (
+                    <div className="tags">
+                      <h4 className="tags__hdl">Tags</h4>
+                      <ul className="tag__items">
+                        {store.data.swp_article_keywords.map((tag, index) => (
+                          <li className="tag__item" key={"tags_" + index}>
+                            <Link
+                              href="/[...slug]"
+                              as={"/tag/" + tag.swp_keyword.slug}
+                            >
+                              <a>{tag.swp_keyword.name}</a>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </article>
               </div>
               <div className="main--right">

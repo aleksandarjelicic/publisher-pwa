@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
-import { getArticles } from "../../../services/articlesService";
+import { getCollectionByWhere } from "../../../services/collectionService";
 import classNames from "classnames";
 import Loading from "../Loading/Loading";
 import ArticleBriefList from "../Articles/ArticleBriefList";
@@ -14,7 +14,7 @@ const SectionMost = () => {
   const currenList = openTab === 1 ? latestArticles : mostReadArticles;
 
   useEffect(() => {
-    getArticles("", 4).then((data) => {
+    getCollectionByWhere("", 4).then((data) => {
       setLoading(false);
       setLatestArticles(data.items);
     });
@@ -26,7 +26,8 @@ const SectionMost = () => {
       const sevenDaysAgo = moment()
         .add(-7, "days")
         .format("YYYY-MM-DDT00:00:00");
-      getArticles(
+
+      getCollectionByWhere(
         'published_at: {_gt: "' + sevenDaysAgo + '"}',
         4,
         1,
