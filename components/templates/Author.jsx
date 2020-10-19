@@ -20,13 +20,43 @@ class Author extends React.Component {
             animate={pageTransitions.animate}
             exit={pageTransitions.exit}
           >
-            <h1>{store.data.name}</h1>
-            <div>{store.data.biography}</div>
-            <div>{store.data.facebook}</div>
-            <div>{store.data.instagram}</div>
-            <div>{store.data.twitter}</div>
-            <div>{store.data.avatar_url}</div>
-            <div>{store.data.author_media_id}</div>
+            <div className="mainCols">
+              <div className="main--left">
+                <section className="section"></section>
+              </div>
+              <div className="main--right">
+                <div className="authorBox">
+                  <figure className="authorBox__img">
+                    {store.data.avatar_url}
+                  </figure>
+                  <h2 className="authorBox__hdl">{store.data.name}</h2>
+                  <p className="authorBox__pos">Dreamy editor in chief</p>
+                  <p className="authorBox__bio">{store.data.biography}</p>
+                  <ul className="authorBox__icons">
+                    <li>
+                      <a href="{store.data.facebook}" target="_BLANK">
+                        <img src="img/social-fb.svg" alt="" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{store.data.twitter}" target="_BLANK">
+                        <img src="img/social-tw.svg" alt="" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{store.data.instagram}" target="_BLANK">
+                        <img src="img/social-ig.svg" alt="" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{store.data.author_media_id}" target="_BLANK">
+                        <img src="img/social-rss.svg" alt="" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
       </Store.Consumer>
