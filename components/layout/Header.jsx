@@ -36,12 +36,14 @@ const Header = () => {
             <ul className="links links--icon">
               <li>
                 <a href="#">
-                  <img src="/img/icon-search.svg" alt="" /> Search
+                  <img src="/img/icon-search.svg" alt="" />
+                  <span>Search</span>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="/img/icon-login.svg" alt="" /> Login
+                  <img src="/img/icon-login.svg" alt="" />
+                  <span>Login</span>
                 </a>
               </li>
             </ul>

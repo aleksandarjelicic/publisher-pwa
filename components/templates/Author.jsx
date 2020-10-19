@@ -32,25 +32,25 @@ class Author extends React.Component {
                   <h2 className="authorBox__hdl">{store.data.name}</h2>
                   <p className="authorBox__pos">Dreamy editor in chief</p>
                   <p className="authorBox__bio">{store.data.biography}</p>
-                  <ul className="authorBox__icons">
+                  <ul className="links links--icon marginBottom20">
                     <li>
                       <a href="{store.data.facebook}" target="_BLANK">
-                        <img src="img/social-fb.svg" alt="" />
+                        <img src="/img/social-fb.svg" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="{store.data.twitter}" target="_BLANK">
-                        <img src="img/social-tw.svg" alt="" />
+                        <img src="/img/social-tw.svg" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="{store.data.instagram}" target="_BLANK">
-                        <img src="img/social-ig.svg" alt="" />
+                        <img src="/img/social-ig.svg" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="{store.data.author_media_id}" target="_BLANK">
-                        <img src="img/social-rss.svg" alt="" />
+                        <img src="/img/social-rss.svg" alt="" />
                       </a>
                     </li>
                   </ul>
