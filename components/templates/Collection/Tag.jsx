@@ -16,14 +16,15 @@ class Tag extends React.Component {
   static getProps = (context, id = null) => {
     const tagInSlugIndex = context.params.slug.indexOf("tag");
     const tagSlug = context.params.slug[tagInSlugIndex + 1];
-
     const pageInSlugIndex = context.params.slug.indexOf("page");
     const page =
       pageInSlugIndex >= 0 ? context.params.slug[pageInSlugIndex + 1] : 1;
+
     return getCollectionByTag(tagSlug, page).then((response) => response);
   };
 
   state = {
+    route: this.context.route,
     tag: this.context.data.tag[0],
     items: this.context.data.items,
     currentPage: this.context.data.metadata.aggregate.currentPage,
@@ -36,6 +37,7 @@ class Tag extends React.Component {
   componentDidUpdate() {
     if (this.context.route.incomingUri !== this.state.route.incomingUri) {
       this.setState({
+        route: this.context.route,
         tag: this.context.data.tag[0],
         items: this.context.data.items,
         currentPage: this.context.data.metadata.aggregate.currentPage,
@@ -53,7 +55,7 @@ class Tag extends React.Component {
 
     this.setState({ loading: true });
     const page = this.state.currentPage + 1;
-    const data = await getCollectionByTag(this.state.tag.slug, page, 2);
+    const data = await getCollectionByTag(this.state.tag.slug, page);
     const showLoadMore =
       data.metadata.aggregate.currentPage >= data.metadata.aggregate.pagesCount
         ? false

@@ -124,6 +124,7 @@ query getAuthor($slug: String = "") {
     name
     twitter
     role
+    slug
   }
 }
 `;
@@ -225,10 +226,6 @@ export const GET_COLLECTION_BY_TAG_QUERY = `
 
 export const GET_COLLECTION_BY_AUTHOR_QUERY = `
   query getArticles($tenant_code: String = "", $authorSlug: String = "", $limit: Int = 10, $offset: Int = 0) {
-    tag: swp_keyword(where: {slug: {_eq: $tagSlug}}) {
-      name
-      slug
-    }
     metadata: swp_article_aggregate(where: {tenant_code: {_eq: $tenant_code}, swp_article_authors: {swp_author: {slug: {_eq: $authorSlug}}}}) {
       aggregate {
         totalCount: count
