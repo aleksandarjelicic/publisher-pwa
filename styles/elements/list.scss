@@ -17,10 +17,13 @@
   @include md {
     flex: 0 0 280px;
   }
+  &:hover {
+    transform: none;
+  }
 }
 
 .list__text {
- flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .list__kicker {

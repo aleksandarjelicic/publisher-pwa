@@ -12,7 +12,9 @@
       align-items: center;
       img {
         width: 24px;
-        margin-right: 10px;
+        & + span {
+          margin-left: 10px;
+        }
       }
     }
   }

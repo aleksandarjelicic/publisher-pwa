@@ -9,22 +9,22 @@ const Footer = () => {
         <ul className="links links--icon">
           <li>
             <a href="#" target="_BLANK">
-              <img src="img/social-fb.svg" alt="" />
+              <img src="img/social-fb-white.svg" alt="" />
             </a>
           </li>
           <li>
             <a href="#" target="_BLANK">
-              <img src="img/social-tw.svg" alt="" />
+              <img src="img/social-tw-white.svg" alt="" />
             </a>
           </li>
           <li>
             <a href="#" target="_BLANK">
-              <img src="img/social-yt.svg" alt="" />
+              <img src="img/social-yt-white.svg" alt="" />
             </a>
           </li>
           <li>
             <a href="#" target="_BLANK">
-              <img src="img/social-rss.svg" alt="" />
+              <img src="img/social-rss-white.svg" alt="" />
             </a>
           </li>
         </ul>
