@@ -23,6 +23,7 @@ export const getPaths = async () => {
 
   result.articles.forEach((article) => {
     const routeSlug = article.swp_route.staticprefix.split("/");
+
     paths.push({
       params: {
         slug: [...routeSlug.filter((r) => r.length > 0), article.slug],

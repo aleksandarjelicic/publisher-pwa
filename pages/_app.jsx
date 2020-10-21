@@ -6,6 +6,14 @@ import { useAmp } from "next/amp";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import * as gtag from "../services/googleAnalyticsService";
+import * as Sentry from "@sentry/node";
+
+if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    enabled: process.env.NODE_ENV === "production",
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  });
+}
 
 function MyApp({ Component, pageProps }) {
   const isAmp = useAmp();

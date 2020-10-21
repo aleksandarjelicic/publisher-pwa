@@ -10,7 +10,8 @@ NEXT_PUBLIC_PUBLISHER_ANALYTICS_ENDPOINT=https://sourcefabric.org/_swp_analytics
 # used for title meta tag
 NEXT_PUBLIC_SITE_NAME=Publisher PWA
 NEXT_PUBLIC_DOMAIN=https://publisherpwa.org
-NEXT_PUBLIC_GA_TRACKING_ID=your google analytics tracking id. Remove if not needed.
+NEXT_PUBLIC_GA_TRACKING_ID= your google analytics tracking id. Remove if not needed.
+NEXT_PUBLIC_SENTRY_DSN= sentry dsn. Remove if not needed.
 ```
 
 - replace sitemap url in public/robots.txt

@@ -10,7 +10,7 @@ import Article from "../components/templates/Article/Article";
 import ArticleAMP from "../components/templates/Article/amp/ArticleAMP";
 import Collection from "../components/templates/Collection/Collection";
 import Content from "../components/templates/Content/Content";
-import NotFound from "../components/templates/NotFound";
+import NotFound from "../pages/404";
 import SectionCustomTemplate from "../components/templates/Collection/SectionCustomTemplate";
 import Author from "../components/templates/Author";
 import Tag from "../components/templates/Collection/Tag";

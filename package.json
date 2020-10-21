@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@popmotion/popcorn": "^0.4.4",
+    "@sentry/browser": "^5.27.0",
+    "@sentry/node": "^5.27.0",
     "article-json-to-amp": "^3.0.2",
     "classnames": "^2.2.6",
     "cors": "2.8.5",
