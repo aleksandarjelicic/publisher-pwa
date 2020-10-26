@@ -46,6 +46,11 @@ const renderer = (templateName) => {
 
 const Pages = (props) => {
   const isAmp = useAmp();
+  let template = props.template;
+
+  if (props.route.type === "article" && isAmp) {
+    template = "ArticleAMP";
+  }
 
   useEffect(() => {
     // publisher page views counter integration
@@ -55,20 +60,19 @@ const Pages = (props) => {
   return (
     <Store.Provider value={{ ...props }}>
       {isAmp ? (
-        renderer(props.template)
+        renderer(template)
       ) : (
-        <BaseLayout>{renderer(props.template)}</BaseLayout>
+        <BaseLayout>{renderer(template)}</BaseLayout>
       )}
     </Store.Provider>
   );
 };
 
 export async function getStaticProps(context) {
-  const _isAmp = context.params.amp ? true : false;
   const menus = await getMenus();
   let route = await matchRoute(context.params.slug, context);
   let incomingUri = "/" + context.params.slug.join("/");
-  if (_isAmp) incomingUri += "?amp=1";
+
   route = { incomingUri: incomingUri, ...route };
 
   let template = "NotFound";
@@ -96,14 +100,12 @@ export async function getStaticProps(context) {
       route.swp_route.articles_template_name === default_article_template)
   ) {
     template = "Article";
-    if (_isAmp) template = "ArticleAMP";
   } else if (
     route.type === "article" &&
     route.swp_route.articles_template_name &&
     route.swp_route.articles_template_name !== default_article_template
   ) {
     template = route.swp_route.articles_template_name;
-    if (_isAmp) template = "ArticleAMP";
   } else if (route.type === "custom" && route.template_name) {
     template = route.template_name;
   }
@@ -117,8 +119,13 @@ export async function getStaticProps(context) {
   }
 
   return {
-    props: { menus: menus, route: route, data: data, template: template },
-    revalidate: 1,
+    props: {
+      menus: menus,
+      route: route,
+      data: data,
+      template: template,
+    },
+    revalidate: 60,
   };
 }
 
