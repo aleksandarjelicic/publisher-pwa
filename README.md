@@ -12,9 +12,13 @@ NEXT_PUBLIC_SITE_NAME=Publisher PWA
 NEXT_PUBLIC_DOMAIN=https://publisherpwa.org
 NEXT_PUBLIC_GA_TRACKING_ID= your google analytics tracking id. Remove if not needed.
 NEXT_PUBLIC_SENTRY_DSN= sentry dsn. Remove if not needed.
-```
 
-- replace sitemap url in public/robots.txt
+# firebase config (push notifications)
+NEXT_PUBLIC_FIREBASE_APIKEY =
+NEXT_PUBLIC_FIREBASE_PROJECTID =
+NEXT_PUBLIC_FIREBASE_SENDERID =
+NEXT_PUBLIC_FIREBASE_APPID =
+```
 
 ## Running development server
 

@@ -1,8 +1,7 @@
-const withPWA = require('next-pwa')
-const runtimeCaching = require('next-pwa/cache')
+const withOffline = require('next-offline')
 const path = require('path')
 
-module.exports = withPWA({
+module.exports = withOffline({
   webpack: (config, options) => {
     // In `pages/_app.js`, Sentry is imported from @sentry/browser. While
     // @sentry/node will run in a Node.js environment. @sentry/node will use
@@ -24,16 +23,38 @@ module.exports = withPWA({
 
     return config;
   },
-  pwa: {
-    dest: 'public',
-    runtimeCaching,
-    disable: process.env.NODE_ENV === 'development',
-  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  workboxOpts: {
+    swDest: 'static/service-worker.js',
+    runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: 'NetworkFirst',
+        options: {
+          cacheName: 'offlineCache',
+          expiration: {
+            maxEntries: 200,
+          },
+        },
+      },
+    ],
+  },
   async rewrites() {
     return [
+      {
+        source: '/service-worker.js',
+        destination: '/_next/static/service-worker.js',
+      },
+      {
+        source: '/firebase-messaging-sw.js',
+        destination: '/_next/static/firebase-messaging-sw.js',
+      },
+      {
+        source: '/static/swenv.js',
+        destination: '/_next/static/swenv.js',
+      },
       {
         source: '/news-sitemap.xml',
         destination: '/api/news-sitemap',

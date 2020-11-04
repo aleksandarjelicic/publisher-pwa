@@ -7,7 +7,7 @@ const ArticleList = ({ showImage = true, article }) => {
   return (
     <article className="list">
       {showImage && article.swp_article_feature_media && (
-        <Link href="/[...slug]" as={href}>
+        <Link href={href}>
           <a className="list__img">
             <Image
               renditions={article.swp_article_feature_media.renditions}
@@ -29,7 +29,7 @@ const ArticleList = ({ showImage = true, article }) => {
               <a href="#">Gilets jaunes movement</a>
             </span> */}
         <h3 className="list__hdl">
-          <Link href="/[...slug]" as={href}>
+          <Link href={href}>
             <a>{article.title}</a>
           </Link>
         </h3>

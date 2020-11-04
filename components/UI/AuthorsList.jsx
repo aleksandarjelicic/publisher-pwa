@@ -6,7 +6,7 @@ const AuthorsList = ({ authors, className = "" }) => {
       {authors.map((item, index) => (
         <span className={className} key={"author" + index}>
           {index > 0 ? ", " : null}
-          <Link href="/[...slug]" as={"/author/" + item.swp_author.slug}>
+          <Link href={"/author/" + item.swp_author.slug}>
             <a>{item.swp_author.name}</a>
           </Link>
         </span>

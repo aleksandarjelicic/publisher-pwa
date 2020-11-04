@@ -5,7 +5,7 @@ const SectionThree = ({ articles, name, moreUrl }) => {
   return (
     <>
       <h2 className="section__hdl">
-        <Link href="/[...slug]" as={moreUrl}>
+        <Link href={moreUrl}>
           <a>{name}</a>
         </Link>
       </h2>

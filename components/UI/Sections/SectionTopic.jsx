@@ -34,7 +34,7 @@ const SectionTopic = ({ articles, name, moreUrl }) => {
           />
         ))}
 
-        <Link href="/[...slug]" as={moreUrl}>
+        <Link href={moreUrl}>
           <a className="btnLink">&gt; More about {name}</a>
         </Link>
       </div>

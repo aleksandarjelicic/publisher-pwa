@@ -1,3 +1,4 @@
+import React from "react";
 import Ad from "../Ads/Ad";
 import ArticleHeroSmall from "../Articles/ArticleHeroSmall";
 import ArticleBriefList from "../Articles/ArticleBriefList";

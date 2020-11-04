@@ -36,7 +36,7 @@ const ArticleBriefList = ({ article, show = "author" }) => {
     <article className="briefList">
       {kicker}
       <h3 className="briefList__hdl">
-        <Link href="/[...slug]" as={href}>
+        <Link href={href}>
           <a>{article.title}</a>
         </Link>
       </h3>

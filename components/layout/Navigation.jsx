@@ -15,7 +15,7 @@ const ActiveLink = ({ href, label }) => {
   const linkClassName = asPath === href ? "active" : "";
 
   return (
-    <Link href="/[...slug]" as={href}>
+    <Link href={href}>
       <a className={linkClassName}>{label}</a>
     </Link>
   );

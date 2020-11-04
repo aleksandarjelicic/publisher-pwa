@@ -100,10 +100,7 @@ class Article extends React.Component {
                       <ul className="tag__items">
                         {store.data.swp_article_keywords.map((tag, index) => (
                           <li className="tag__item" key={"tags_" + index}>
-                            <Link
-                              href="/[...slug]"
-                              as={"/tag/" + tag.swp_keyword.slug}
-                            >
+                            <Link href={"/tag/" + tag.swp_keyword.slug}>
                               <a>{tag.swp_keyword.name}</a>
                             </Link>
                           </li>

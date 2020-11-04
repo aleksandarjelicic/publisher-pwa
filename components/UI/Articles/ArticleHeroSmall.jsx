@@ -6,7 +6,7 @@ const ArticleHeroSmall = ({ article }) => {
   const gallery = article.swp_slideshows.length ? true : false;
   return (
     <article className="hero hero--small">
-      <Link href="/[...slug]" as={href}>
+      <Link href={href}>
         <a>
           {article.swp_article_feature_media && (
             <Image

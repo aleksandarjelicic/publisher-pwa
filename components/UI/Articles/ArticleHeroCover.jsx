@@ -10,7 +10,7 @@ const ArticleHeroCover = ({ className, article }) => {
 
   return (
     <article className={elClass}>
-      <Link href="/[...slug]" as={href}>
+      <Link href={href}>
         <a>
           {article.swp_article_feature_media && (
             <Image
