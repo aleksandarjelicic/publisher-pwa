@@ -31,13 +31,7 @@ const ArticleHeroSmall = ({ article, headingClassName = "" }) => {
           ) : null}
           <div className="hero__text hero__text--small">
             {/* <span className="hero__kicker">Gallery</span> */}
-            <h2
-              className={`hero__hdl ${
-                headingClassName ? headingClassName : " "
-              }`}
-            >
-              {article.title}
-            </h2>
+            <h2 className={`hero__hdl ${headingClassName}`}>{article.title}</h2>
           </div>
         </a>
       </Link>
