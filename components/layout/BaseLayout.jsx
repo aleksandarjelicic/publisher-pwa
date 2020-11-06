@@ -5,9 +5,7 @@ import { firebaseCloudMessaging } from "../../services/webPush";
 
 const BaseLayout = ({ children }) => {
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_FIREBASE_SENDERID) {
-      firebaseCloudMessaging.init();
-    }
+    firebaseCloudMessaging.init();
   }, []);
 
   return (

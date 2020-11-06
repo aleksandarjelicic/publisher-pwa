@@ -21,6 +21,8 @@ module.exports = withOffline({
       config.resolve.alias['@sentry/node'] = '@sentry/browser';
     }
 
+    console.log('buildId', options.buildId);
+
     return config;
   },
   sassOptions: {
@@ -46,14 +48,6 @@ module.exports = withOffline({
       {
         source: '/service-worker.js',
         destination: '/_next/static/service-worker.js',
-      },
-      {
-        source: '/firebase-messaging-sw.js',
-        destination: '/_next/static/firebase-messaging-sw.js',
-      },
-      {
-        source: '/static/swenv.js',
-        destination: '/_next/static/swenv.js',
       },
       {
         source: '/news-sitemap.xml',

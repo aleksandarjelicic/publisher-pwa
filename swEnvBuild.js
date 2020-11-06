@@ -11,5 +11,5 @@ const writeValue = `const process = {
   }
 };`;
 
-fs.writeFileSync('./static/swenv.js', writeValue);
+fs.writeFileSync('./public/swenv.js', writeValue);
 

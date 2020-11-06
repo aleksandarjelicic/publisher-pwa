@@ -47,8 +47,25 @@ function MyApp({ Component, pageProps }) {
         )}
         <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="theme-color" content="#3367D6" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="application-name"
+          content={process.env.NEXT_PUBLIC_SITE_NAME}
+        />
+        <meta
+          name="apple-mobile-web-app-title"
+          content={process.env.NEXT_PUBLIC_SITE_NAME}
+        />
+        <meta name="msapplication-starturl" content="/" />
+        <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-icon-180x180.png"
+        ></link>
         <meta name="robots" content="index,follow" />
       </Head>
       <AnimatePresence exitBeforeEnter>
