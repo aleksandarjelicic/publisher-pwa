@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "../Image";
 
-const ArticleHeroSmall = ({ article, smallHeadline }) => {
-  console.log({ smallHeadline });
+const ArticleHeroSmall = ({ article, className }) => {
   const href = article.swp_route.staticprefix + "/" + article.slug;
   const gallery = article.swp_slideshows.length ? true : false;
   return (
@@ -32,9 +31,7 @@ const ArticleHeroSmall = ({ article, smallHeadline }) => {
           ) : null}
           <div className="hero__text hero__text--small">
             {/* <span className="hero__kicker">Gallery</span> */}
-            <h2
-              className={`hero__hdl ${smallHeadline ? "" : "hero__hdl--small"}`}
-            >
+            <h2 className={`hero__hdl ${className ? className : " "}`}>
               {article.title}
             </h2>
           </div>

@@ -1,7 +1,7 @@
 import ArticleHeroSmall from "../Articles/ArticleHeroSmall";
 import Link from "next/link";
 
-const SectionTwo = ({ articles, name, moreUrl, smallHeadline }) => {
+const SectionTwo = ({ articles, name, moreUrl }) => {
   return (
     <>
       <h2 className="section__hdl">
@@ -16,7 +16,7 @@ const SectionTwo = ({ articles, name, moreUrl, smallHeadline }) => {
             className="grid__item gi-xsmall-12 gi-medium-6"
             key={name.replace(/\s/g, "") + index}
           >
-            <ArticleHeroSmall article={item} smallHeadline={smallHeadline} />
+            <ArticleHeroSmall article={item} />
           </div>
         ))}
       </div>

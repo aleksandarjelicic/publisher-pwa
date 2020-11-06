@@ -113,7 +113,6 @@ class Homepage extends React.Component {
                   articles={store.data.travel.items}
                   name="Travel"
                   moreUrl="/travel"
-                  smallHeadline="no"
                 />
               </section>
               <div className="mainCols">

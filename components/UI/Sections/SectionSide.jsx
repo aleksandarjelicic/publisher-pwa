@@ -11,13 +11,17 @@ const SectionSide = ({ articles, name }) => {
       {articles.map((item, index) => {
         if (index === 0)
           return (
-            <ArticleHeroSmall article={item} key={"sectionSide" + index} />
+            <ArticleHeroSmall
+              article={item}
+              key={"sectionSide" + index}
+              className="hero__hdl--small"
+            />
           );
         if (index === 5)
           return (
             <React.Fragment key={"sectionSide" + index}>
               <Ad />
-              <ArticleHeroSmall article={item} />
+              <ArticleHeroSmall article={item} className="hero__hdl--small" />
             </React.Fragment>
           );
 
