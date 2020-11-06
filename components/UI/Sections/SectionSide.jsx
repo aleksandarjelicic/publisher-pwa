@@ -14,14 +14,17 @@ const SectionSide = ({ articles, name }) => {
             <ArticleHeroSmall
               article={item}
               key={"sectionSide" + index}
-              className="hero__hdl--small"
+              headingClassName="hero__hdl--small"
             />
           );
         if (index === 5)
           return (
             <React.Fragment key={"sectionSide" + index}>
               <Ad />
-              <ArticleHeroSmall article={item} className="hero__hdl--small" />
+              <ArticleHeroSmall
+                article={item}
+                headingClassName="hero__hdl--small"
+              />
             </React.Fragment>
           );
 
