@@ -1,8 +1,4 @@
 .head {
-  margin: 0px -10px;
-  @include sm {
-    margin: 0px;
-  }
 }
 
 .head__top {
@@ -13,7 +9,11 @@
 }
 
 .head__topLeft {
+  display: none;
   margin-top: 10px;
+  @include md {
+    display: block;
+  }
 }
 
 .head__topRight {
@@ -30,7 +30,6 @@
 }
 
 .head__middle {
-
 }
 
 .head__logo {

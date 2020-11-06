@@ -2,45 +2,43 @@ $spaceamounts: 0, 20, 30;
 $sides: top, bottom, all;
 
 @each $space in $spaceamounts {
+  @each $side in $sides {
+    @if $side == "all" {
+      .margin#{$space} {
+        margin: #{$space / 2}px !important;
 
-    @each $side in $sides {
-      @if $side == "all" {
-        .margin#{$space} {
-          margin: #{$space / 2}px !important;
-
-          @include sm {
-            margin: #{$space}px !important;
-          }
+        @include sm {
+          margin: #{$space}px !important;
         }
-
-        // .padding#{$space} {
-        //   padding: #{$space / 2}px !important;
-
-        //   @include sm {
-        //     padding: #{$space}px !important;
-        //   }
-        // }
       }
-      @else {
-        .margin#{to-upper-case(str-slice($side, 1, 1)) + str-slice($side, 2)}#{$space} {
-          margin-#{$side}: #{$space / 2}px !important;
 
-          @include sm {
-            margin-#{$side}: #{$space}px !important;
-          }
+      // .padding#{$space} {
+      //   padding: #{$space / 2}px !important;
+
+      //   @include sm {
+      //     padding: #{$space}px !important;
+      //   }
+      // }
+    } @else {
+      .margin#{to-upper-case(str-slice($side, 1, 1))
+        + str-slice($side, 2)}#{$space} {
+        margin-#{$side}: #{$space / 2}px !important;
+
+        @include sm {
+          margin-#{$side}: #{$space}px !important;
         }
-
-        // .padding#{to-upper-case(str-slice($side, 1, 1)) + str-slice($side, 2)}#{$space} {
-        //   padding-#{$side}: #{$space / 2}px !important;
-
-        //   @include sm {
-        //     padding-#{$side}: #{$space}px !important;
-        //   }
-        // }
       }
+
+      // .padding#{to-upper-case(str-slice($side, 1, 1)) + str-slice($side, 2)}#{$space} {
+      //   padding-#{$side}: #{$space / 2}px !important;
+
+      //   @include sm {
+      //     padding-#{$side}: #{$space}px !important;
+      //   }
+      // }
     }
   }
-
+}
 
 // .margin {
 //   &Top10 {
@@ -86,6 +84,9 @@ $sides: top, bottom, all;
 .container {
   max-width: 1084px;
   margin: 0 auto;
-  padding: 0px 30px;
+  padding: 0px 15px;
   background: $colorWhite;
+  @include md {
+    padding: 0px 30px;
+  }
 }
