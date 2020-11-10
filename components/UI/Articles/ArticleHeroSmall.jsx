@@ -5,7 +5,7 @@ import { isCached } from "../../../services/cacheService";
 import Image from "../Image";
 import Store from "../../Store";
 
-const ArticleHeroSmall = ({ article }) => {
+const ArticleHeroSmall = ({ article, headingClassName = "" }) => {
   const store = useContext(Store);
   const href = article.swp_route.staticprefix + "/" + article.slug;
   const gallery = article.swp_slideshows.length ? true : false;
@@ -51,7 +51,7 @@ const ArticleHeroSmall = ({ article }) => {
           ) : null}
           <div className="hero__text hero__text--small">
             {/* <span className="hero__kicker">Gallery</span> */}
-            <h2 className="hero__hdl hero__hdl--small">{article.title}</h2>
+            <h2 className={`hero__hdl ${headingClassName}`}>{article.title}</h2>
           </div>
         </a>
       </Link>
