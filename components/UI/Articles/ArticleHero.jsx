@@ -1,11 +1,31 @@
+import { useContext, useEffect, useState } from "react";
+import classNames from "classnames";
 import Link from "next/link";
+import { isCached } from "../../../services/cacheService";
 import Image from "../Image";
+import Store from "../../Store";
 
 const ArticleHero = ({ article }) => {
+  const store = useContext(Store);
   const href = article.swp_route.staticprefix + "/" + article.slug;
   const gallery = article.swp_slideshows.length ? true : false;
+
+  const [_isCached, setCached] = useState(false);
+
+  useEffect(() => {
+    if (!store.isOnline) {
+      isCached(href).then((res) => {
+        setCached(res);
+      });
+    }
+  }, [store.isOnline]);
+
   return (
-    <article className="hero">
+    <article
+      className={classNames("hero", {
+        unavailableOffline: !_isCached && !store.isOnline,
+      })}
+    >
       <Link href={href}>
         <a>
           {article.swp_article_feature_media && (

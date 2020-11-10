@@ -5,6 +5,7 @@ import Head from "next/head";
 import { useAmp } from "next/amp";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import useOnlineStatus from "../hooks/useOnlineStatus";
 import * as gtag from "../services/googleAnalyticsService";
 import * as Sentry from "@sentry/node";
 
@@ -15,7 +16,8 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   });
 }
 
-function MyApp({ Component, pageProps }) {
+function PublisherPwa({ Component, pageProps }) {
+  const onlineStatus = useOnlineStatus();
   const isAmp = useAmp();
   const router = useRouter();
 
@@ -69,10 +71,10 @@ function MyApp({ Component, pageProps }) {
         <meta name="robots" content="index,follow" />
       </Head>
       <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} />
+        <Component {...pageProps} isOnline={onlineStatus} />
       </AnimatePresence>
     </>
   );
 }
 
-export default MyApp;
+export default PublisherPwa;

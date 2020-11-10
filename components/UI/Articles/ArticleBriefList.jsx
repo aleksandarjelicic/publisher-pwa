@@ -1,10 +1,25 @@
+import { useContext, useEffect, useState } from "react";
+import classNames from "classnames";
 import Link from "next/link";
 import moment from "moment";
+import { isCached } from "../../../services/cacheService";
+import Store from "../../Store";
 
 // show = "author" || "date" ||  "relative_date"
 const ArticleBriefList = ({ article, show = "author" }) => {
+  const store = useContext(Store);
   const href = article.swp_route.staticprefix + "/" + article.slug;
   let kicker = null;
+
+  const [_isCached, setCached] = useState(false);
+
+  useEffect(() => {
+    if (!store.isOnline) {
+      isCached(href).then((res) => {
+        setCached(res);
+      });
+    }
+  }, [store.isOnline]);
 
   switch (show) {
     case "author":
@@ -33,7 +48,11 @@ const ArticleBriefList = ({ article, show = "author" }) => {
   }
 
   return (
-    <article className="briefList">
+    <article
+      className={classNames("briefList", {
+        unavailableOffline: !_isCached && !store.isOnline,
+      })}
+    >
       {kicker}
       <h3 className="briefList__hdl">
         <Link href={href}>

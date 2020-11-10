@@ -1,5 +1,8 @@
 const withOffline = require('next-offline')
 const path = require('path')
+const fs = require('fs');
+
+
 
 module.exports = withOffline({
   webpack: (config, options) => {
@@ -21,7 +24,8 @@ module.exports = withOffline({
       config.resolve.alias['@sentry/node'] = '@sentry/browser';
     }
 
-    console.log('buildId', options.buildId);
+    const writeValue = `export const buildId = "${options.buildId}"; \n`;
+    fs.writeFileSync('./public/buildId.js', writeValue);
 
     return config;
   },
