@@ -30,6 +30,7 @@
   &--load {
     position: relative;
     padding: 10px 40px;
+    transition: transform 0.2s;
     &:disabled {
       .btn__spin {
         opacity: 1;

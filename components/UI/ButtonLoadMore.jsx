@@ -1,8 +1,7 @@
 const ButtonLoadMore = ({ onClick, loading }) => {
   return (
     <button
-      className="btn btn--load"
-      style={{ margin: "2em auto", display: "block" }}
+      className="btn btn--load center"
       onClick={onClick}
       disabled={loading}
     >
