@@ -13,7 +13,7 @@ NEXT_PUBLIC_DOMAIN=https://publisherpwa.org
 NEXT_PUBLIC_GA_TRACKING_ID= your google analytics tracking id. Remove if not needed.
 NEXT_PUBLIC_SENTRY_DSN= sentry dsn. Remove if not needed.
 
-# firebase config (push notifications)
+# firebase config (push notifications). Remove if not needed
 NEXT_PUBLIC_FIREBASE_APIKEY =
 NEXT_PUBLIC_FIREBASE_PROJECTID =
 NEXT_PUBLIC_FIREBASE_SENDERID =
@@ -23,6 +23,8 @@ NEXT_PUBLIC_FIREBASE_APPID =
 ## Running development server
 
 ```bash
+npm install
+
 npm run dev
 # or
 yarn dev
