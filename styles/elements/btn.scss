@@ -1,12 +1,24 @@
 @import "_variables.scss";
 
+@keyframes btn-spin {
+  0% {
+    animation-timing-function: cubic-bezier(0.5856, 0.0703, 0.4143, 0.9297);
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .btn {
   font-size: 1.4rem;
   font-weight: 700;
   padding: 10px 30px;
   text-transform: uppercase;
   border: 1px solid #333;
+  background: transparent;
   border-radius: 2px;
+  cursor: pointer;
   &:hover {
     opacity: 0.9;
   }
@@ -14,6 +26,35 @@
     color: $colorWhite;
     background: #f45555;
     border: 1px solid #f45555;
+  }
+  &--load {
+    position: relative;
+    padding: 10px 40px;
+    transition: transform 0.2s;
+    &:disabled {
+      .btn__spin {
+        opacity: 1;
+        &:after {
+          animation: btn-spin 1s infinite linear;
+        }
+      }
+    }
+  }
+  &__spin {
+    position: absolute;
+    left: 15px;
+    opacity: 0;
+    &:after {
+      content: " ";
+      display: block;
+      width: 15px;
+      height: 15px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      border-left-color: transparent;
+      backface-visibility: hidden;
+    }
   }
 }
 

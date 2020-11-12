@@ -55,7 +55,8 @@ h6 {
   font-size: 1rem;
 }
 
-a {
+a,
+.btn--load {
   color: $colorDark;
   text-decoration: none;
   transition: transform 0.2s;
