@@ -1,13 +1,13 @@
 import ArticleHeroSmall from "../Articles/ArticleHeroSmall";
-import Link from "next/link";
+import LinkOffline from "../LinkOffline";
 
 const SectionTwo = ({ articles, name, moreUrl }) => {
   return (
     <>
       <h2 className="section__hdl">
-        <Link href={moreUrl}>
+        <LinkOffline href={moreUrl}>
           <a>{name}</a>
-        </Link>
+        </LinkOffline>
       </h2>
 
       <div className="grid grid--boxed">

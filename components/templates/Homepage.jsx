@@ -1,4 +1,5 @@
 import React from "react";
+import localforage from "localforage";
 import { getContentList } from "../../services/contentListService";
 import { getCollectionByRoute } from "../../services/collectionService";
 import { motion } from "framer-motion";
@@ -51,30 +52,30 @@ class Homepage extends React.Component {
             >
               <ArticleHeroCover
                 article={
-                  store.data.topnews.items[0]
-                    ? store.data.topnews.items[0].article
-                    : {}
+                  store.data.topnews.items[0] ? store.data.topnews.items[0] : {}
                 }
               />
               <div className="mainCols">
                 <div className="main--left">
-                  {store.data.topnews.items.map((item, index) => {
-                    if (index === 0) return null;
-                    if (index === 3)
+                  <div
+                    onClick={() => {
+                      localforage.setItem("prevRouteType", {
+                        type: "list",
+                        name: "top news",
+                      });
+                    }}
+                  >
+                    {store.data.topnews.items.map((item, index) => {
+                      if (index === 0) return null;
+                      if (index === 3)
+                        return (
+                          <ArticleHero article={item} key={"topnews" + index} />
+                        );
                       return (
-                        <ArticleHero
-                          article={item.article}
-                          key={"topnews" + index}
-                        />
+                        <ArticleList article={item} key={"topnews" + index} />
                       );
-                    return (
-                      <ArticleList
-                        article={item.article}
-                        key={"topnews" + index}
-                      />
-                    );
-                  })}
-
+                    })}
+                  </div>
                   <SectionTopic
                     articles={store.data.coronavirus.items}
                     name="Corona virus"
@@ -132,9 +133,7 @@ class Homepage extends React.Component {
               <ArticleHeroCover
                 className="marginBottom0"
                 article={
-                  store.data.bottom.items[0]
-                    ? store.data.bottom.items[0].article
-                    : {}
+                  store.data.bottom.items[0] ? store.data.bottom.items[0] : {}
                 }
               />
             </motion.div>

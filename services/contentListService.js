@@ -21,6 +21,10 @@ export const getContentList = (name, page = 1, limit = 10000) => {
         list.metadata.aggregate.totalCount / limit
       );
 
+      list.items.forEach((item, index) => {
+        list.items[index] = item.article;
+      });
+
       return list;
     })
     .catch((err) => {

@@ -16,6 +16,7 @@ query getMenus($parent_id: Int_comparison_exp = {_eq: 10}, $tenant_code: String!
 export const GET_ARTICLE_QUERY = `
 query getArticle($articleId: Int) {
   article: swp_article(where: {id: {_eq: $articleId}}) {
+    id
     body
     comments_count
     extra
@@ -74,6 +75,30 @@ query getArticle($articleId: Int) {
       swp_keyword {
         name
         slug
+      }
+    }
+    swp_article_related {
+      swp_article {
+        lead
+        slug
+        title
+        swp_article_feature_media {
+          renditions: swp_image_renditions {
+            name
+            width
+            height
+            image: swp_image {
+              asset_id
+              file_extension
+              variants
+            }
+          }
+        }
+        swp_route {
+          id
+          name
+          staticprefix
+        }
       }
     }
     swp_article_seo_metadata {
@@ -137,12 +162,14 @@ export const GET_COLLECTION_QUERY = `
       }
     }
     items: swp_article(limit: $limit, offset: $offset, order_by: {published_at: desc}, where: {tenant_code: {_eq: $tenant_code}, route_id: {_eq: $routeId}}) {
+      id
       comments_count
       lead
       paywall_secured
       published_at
       slug
       title
+      body
       swp_article_authors {
         swp_author {
           name
@@ -168,6 +195,7 @@ export const GET_COLLECTION_QUERY = `
         id
       }
       swp_route {
+        id
         staticprefix
       }
     }
@@ -187,12 +215,14 @@ export const GET_COLLECTION_BY_TAG_QUERY = `
       }
     }
     items: swp_article(limit: $limit, offset: $offset, order_by: {published_at: desc}, where: {tenant_code: {_eq: $tenant_code}, swp_article_keywords: {swp_keyword: {slug: {_eq: $tagSlug}}}}) {
+      id
       comments_count
       lead
       paywall_secured
       published_at
       slug
       title
+      body
       swp_article_authors {
         swp_author {
           name
@@ -218,6 +248,7 @@ export const GET_COLLECTION_BY_TAG_QUERY = `
         id
       }
       swp_route {
+        id
         staticprefix
       }
     }
@@ -232,12 +263,14 @@ export const GET_COLLECTION_BY_AUTHOR_QUERY = `
       }
     }
     items: swp_article(limit: $limit, offset: $offset, order_by: {published_at: desc}, where: {tenant_code: {_eq: $tenant_code}, swp_article_authors: {swp_author: {slug: {_eq: $authorSlug}}}}) {
+      id
       comments_count
       lead
       paywall_secured
       published_at
       slug
       title
+      body
       swp_article_authors {
         swp_author {
           name
@@ -263,6 +296,7 @@ export const GET_COLLECTION_BY_AUTHOR_QUERY = `
         id
       }
       swp_route {
+        id
         staticprefix
       }
     }
@@ -276,11 +310,13 @@ query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: Stri
     name
     items: swp_content_list_items(limit: $limit, offset: $offset, order_by: {position: asc}) {
       article: swp_article {
+        id
         comments_count
         lead
         published_at
         title
         slug
+        body
         swp_article_authors {
           swp_author {
             name
@@ -306,6 +342,7 @@ query getArticles($listName: String = "", $limit: Int = 1000, $tenant_code: Stri
           id
         }
         swp_route {
+          id
           staticprefix
         }
       }

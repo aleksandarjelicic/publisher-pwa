@@ -2,7 +2,12 @@ import LinkOffline from "../LinkOffline";
 import Image from "../Image";
 
 const ArticleList = ({ showImage = true, article }) => {
+  if (article.article) {
+    article = article.article;
+  }
+
   const href = article.swp_route.staticprefix + "/" + article.slug;
+
   return (
     <LinkOffline href={href}>
       <a>

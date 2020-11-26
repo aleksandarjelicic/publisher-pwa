@@ -1,13 +1,17 @@
 import ArticleList from "../Articles/ArticleList";
-import Link from "next/link";
+import LinkOffline from "../LinkOffline";
 
-const SectionThree = ({ articles, name, moreUrl }) => {
+const SectionThree = ({ articles, name, moreUrl = null }) => {
   return (
     <>
       <h2 className="section__hdl">
-        <Link href={moreUrl}>
-          <a>{name}</a>
-        </Link>
+        {moreUrl ? (
+          <LinkOffline href={moreUrl}>
+            <a>{name}</a>
+          </LinkOffline>
+        ) : (
+          <span>{name}</span>
+        )}
       </h2>
       {articles.map((item, index) => (
         <ArticleList article={item} key={name.replace(/\s/g, "") + index} />

@@ -1,17 +1,15 @@
 import ArticleList from "../Articles/ArticleList";
-import Link from "next/link";
+import LinkOffline from "../LinkOffline";
 import Image from "../Image";
 
 const SectionTopic = ({ articles, name, moreUrl }) => {
-  const imageArticle = articles.find(
-    (item) => item.article.swp_article_feature_media
-  );
+  const imageArticle = articles.find((item) => item.swp_article_feature_media);
 
   return (
     <section className="topic">
       {imageArticle ? (
         <Image
-          renditions={imageArticle.article.swp_article_feature_media.renditions}
+          renditions={imageArticle.swp_article_feature_media.renditions}
           srcSet={[
             { name: "440x292", maxWidth: "440" },
             { name: "708x471", minWidth: "441" },
@@ -29,14 +27,14 @@ const SectionTopic = ({ articles, name, moreUrl }) => {
         {articles.map((item, index) => (
           <ArticleList
             showImage={false}
-            article={item.article}
+            article={item}
             key={name.replace(/\s/g, "") + index}
           />
         ))}
 
-        <Link href={moreUrl}>
+        <LinkOffline href={moreUrl}>
           <a className="btnLink">&gt; More about {name}</a>
-        </Link>
+        </LinkOffline>
       </div>
     </section>
   );
