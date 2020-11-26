@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styles from "./Image.module.css";
 import Rendition from "./Rendition";
-import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
+import { useInView } from "react-intersection-observer";
 
 const media_url = process.env.NEXT_PUBLIC_MEDIA_URL;
 
@@ -37,20 +37,10 @@ const Image = ({
 }) => {
   if (!width || !height) return null;
   const randomId = Math.random().toString(36).substring(7);
-  const [inView, setInview] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const ref = useRef();
 
-  useIntersectionObserver({
-    target: ref,
-    onIntersect: ([{ isIntersecting }], observerElement) => {
-      if (isIntersecting) {
-        if (!inView) {
-          setInview(true);
-        }
-        observerElement.unobserve(ref.current);
-      }
-    },
+  const [ref, inView] = useInView({
+    triggerOnce: true,
   });
 
   const onLoad = () => {

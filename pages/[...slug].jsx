@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import localforage from "localforage";
 import { useAmp } from "next/amp";
 import { getMenus } from "../services/menuService";
 import { matchRoute } from "../services/routeMatcherService";
@@ -54,7 +55,26 @@ const Pages = (props) => {
 
   useEffect(() => {
     // publisher page views counter integration
-    if (props.route.type === "article") sendPageView(props.route.id);
+    if (props.route.type === "article") {
+      sendPageView(props.route.id);
+      localforage.getItem("readArticles").then((articles) => {
+        if (!articles) articles = [];
+        // making sure that there are not too many items
+        if (articles.length > 50) articles.splice(0, 25);
+
+        articles.push(props.data.id);
+        // removing duplicates with Set
+        articles = [...new Set(articles)];
+
+        localforage.setItem("readArticles", articles);
+      });
+    } else {
+      // saving previous route type to know where user came from
+      localforage.setItem("prevRouteType", {
+        type: "page",
+        kind: "collection",
+      });
+    }
   }, [props.route]);
 
   return (
