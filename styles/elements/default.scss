@@ -60,6 +60,7 @@ a,
 .btn--load {
   color: $colorDark;
   text-decoration: none;
+  transform: translateY(0);
   transition: transform 0.2s;
   &:hover {
     transform: translateY(-2px);

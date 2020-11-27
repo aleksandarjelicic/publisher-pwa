@@ -28,9 +28,24 @@
     left: 0px;
     right: 0px;
     bottom: 0px;
-    background-image: -webkit-linear-gradient(78deg, rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.15) 52%,rgba(0,0,0,0) 70%);
-    background-image: -o-linear-gradient(78deg, rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.15) 52%,rgba(0,0,0,0) 70%);
-    background-image: linear-gradient(12deg, rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.15) 52%,rgba(0,0,0,0) 70%);
+    background-image: -webkit-linear-gradient(
+      78deg,
+      rgba(0, 0, 0, 0.6) 15%,
+      rgba(0, 0, 0, 0.15) 52%,
+      rgba(0, 0, 0, 0) 70%
+    );
+    background-image: -o-linear-gradient(
+      78deg,
+      rgba(0, 0, 0, 0.6) 15%,
+      rgba(0, 0, 0, 0.15) 52%,
+      rgba(0, 0, 0, 0) 70%
+    );
+    background-image: linear-gradient(
+      12deg,
+      rgba(0, 0, 0, 0.6) 15%,
+      rgba(0, 0, 0, 0.15) 52%,
+      rgba(0, 0, 0, 0) 70%
+    );
   }
 }
 
@@ -70,8 +85,12 @@
 }
 
 .hero--cover {
-  margin-left: -30px;
-  margin-right: -30px;
+  margin-left: -15px;
+  margin-right: -15px;
+  @include md {
+    margin-left: -30px;
+    margin-right: -30px;
+  }
 }
 
 .hero__text--cover {
@@ -95,12 +114,12 @@
 }
 
 .hero__text--small {
-    position: absolute;
-    margin-left: 0px;
-    left: 20px;
-    bottom: 20px;
-    * {
-      color: $colorWhite;
+  position: absolute;
+  margin-left: 0px;
+  left: 20px;
+  bottom: 20px;
+  * {
+    color: $colorWhite;
   }
 }
 
