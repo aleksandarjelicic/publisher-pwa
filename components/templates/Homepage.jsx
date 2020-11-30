@@ -142,7 +142,7 @@ class Homepage extends React.Component {
                 </div>
               </div>
               <ArticleHeroCover
-                className="marginBottom0"
+                className="marginBottom-20"
                 article={
                   store.data.bottom.items[0] ? store.data.bottom.items[0] : {}
                 }

@@ -10,7 +10,7 @@ const Teaser = ({ data }) => {
 
   return (
     <>
-      <article className="article__full">
+      <article className="article__full article__sugg">
         {/* <span className="article__kicker">
                     Gilets jaunes movement
                   </span> */}
@@ -43,28 +43,15 @@ const Teaser = ({ data }) => {
         )}
         <div style={{ position: "relative" }}>
           <div
-            className="article__text"
+            className="article__text marginBottom30"
             dangerouslySetInnerHTML={{
-              __html: trimHtml(data.body, { limit: 700 }),
+              __html: trimHtml(data.body, { limit: 200 }),
             }}
           ></div>
-          <div
-            style={{
-              textAlign: "center",
-              position: "absolute",
-              bottom: "0",
-              left: "0",
-              right: "0",
-              paddingTop: "150px",
-              paddingBottom: "1em",
-              backgroundImage:
-                "linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 35%, rgb(255, 255, 255) 100%)",
-            }}
-          >
-            <LinkOffline href={href}>
-              <a className="btn btn--load center">continue reading</a>
-            </LinkOffline>
-          </div>
+          <div className="article__suggBtn"></div>
+          <LinkOffline href={href}>
+            <a className="btn btn--load center">continue reading</a>
+          </LinkOffline>
         </div>
       </article>
     </>
