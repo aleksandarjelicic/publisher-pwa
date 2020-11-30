@@ -28,6 +28,7 @@ query getArticle($articleId: Int) {
     title
     locale
     swp_route {
+      id
       name
       staticprefix
     }

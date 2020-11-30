@@ -50,11 +50,22 @@ class Homepage extends React.Component {
               animate={pageTransitions.animate}
               exit={pageTransitions.exit}
             >
-              <ArticleHeroCover
-                article={
-                  store.data.topnews.items[0] ? store.data.topnews.items[0] : {}
-                }
-              />
+              <div
+                onClick={() => {
+                  localforage.setItem("prevRouteType", {
+                    type: "list",
+                    name: "top news",
+                  });
+                }}
+              >
+                <ArticleHeroCover
+                  article={
+                    store.data.topnews.items[0]
+                      ? store.data.topnews.items[0]
+                      : {}
+                  }
+                />
+              </div>
               <div className="mainCols">
                 <div className="main--left">
                   <div

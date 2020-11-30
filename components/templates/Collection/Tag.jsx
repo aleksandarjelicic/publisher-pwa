@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import localforage from "localforage";
 import { pageTransitions } from "../../../config/framerMotionAnimations";
 import { getCollectionByTag } from "../../../services/collectionService";
 import Store from "../../Store";
@@ -81,7 +82,15 @@ class Tag extends React.Component {
           >
             <CollectionHead data={store} />
             <div className="mainCols">
-              <div className="main--left">
+              <div
+                className="main--left"
+                onClick={() => {
+                  localforage.setItem("prevRouteType", {
+                    type: "tag",
+                    name: this.state.tag.slug,
+                  });
+                }}
+              >
                 <h2>Tag: {this.state.tag.name}</h2>
                 <Listing items={this.state.items} allSmall={true} />
                 {this.state.showLoadMore ? (
