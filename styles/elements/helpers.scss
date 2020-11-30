@@ -81,6 +81,13 @@ $sides: top, bottom, all;
 //   }
 // }
 
+.marginBottom-20 {
+  margin-bottom: -10px !important;
+  @include md {
+    margin-bottom: -20px !important;
+  }
+}
+
 .container {
   max-width: 1084px;
   margin: 0 auto;
@@ -93,6 +100,7 @@ $sides: top, bottom, all;
 
 .center {
   display: block;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
