@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import ReadingProgress from "../../UI/ReadingProgress";
 import Image from "../../UI/Image";
 import Slideshow from "../../UI/Slideshow";
 import AuthorsList from "../../UI/AuthorsList";
@@ -7,9 +8,12 @@ import SectionThree from "../../UI/Sections/SectionThree";
 import LinkOffline from "../../UI/LinkOffline";
 
 const Body = ({ data }) => {
+  const ref = useRef();
+
   return (
     <>
-      <article className="article__full">
+      <ReadingProgress barColor="#f45555" height="4px" refTarget={ref} />
+      <article className="article__full" ref={ref}>
         {/* <span className="article__kicker">
                     Gilets jaunes movement
                   </span> */}
