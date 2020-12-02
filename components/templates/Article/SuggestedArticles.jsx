@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import localforage from "localforage";
 import { getContentList } from "../../../services/contentListService";
-import { getCollectionByRoute } from "../../../services/collectionService";
+import {
+  getCollectionByRoute,
+  getCollectionByTag,
+  getCollectionByAuthor,
+} from "../../../services/collectionService";
 import Loading from "../../UI/Loading/Loading";
 import Teaser from "./Teaser";
 
@@ -33,98 +37,88 @@ const SuggestedArticles = ({ article }) => {
     setLoading(true);
     localforage.getItem("prevRouteType").then((prevRouteType) => {
       localforage.getItem("readArticles").then(async (readArticles) => {
-        if (prevRouteType && prevRouteType.type === "page") {
-          // collection
-          const newArticles = await getSuggestedArticlesFromRoute(
-            article.swp_route.id,
-            readArticles,
-            page,
-            articles
-          );
-          setArticles(newArticles);
-        } else if (prevRouteType && prevRouteType.type === "tag") {
-          // tag pages
-        } else {
-          // content list, directly to article
-          let listName = "top news";
-          if (
-            prevRouteType &&
-            prevRouteType.type === "list" &&
-            prevRouteType.name
-          ) {
-            listName = prevRouteType.name;
-          }
+        const newArticles = await getSuggestedArticles(
+          prevRouteType,
+          readArticles,
+          page,
+          articles
+        );
+        setArticles(newArticles);
 
-          const newArticles = await getSuggestedArticlesFromContentList(
-            listName,
-            readArticles,
-            page,
-            articles
-          );
-          setArticles(newArticles);
-        }
         setLoading(false);
       });
     });
   };
 
   // recurrency
-  const getSuggestedArticlesFromContentList = async (
-    listName,
+  const getSuggestedArticles = async (
+    prevRouteType,
     readArticles,
     prevPage,
     prevArticles
   ) => {
     const currentPage = prevPage + 1;
-    const list = await getContentList(listName, currentPage, 10);
+    let collection;
 
-    setPage(list.metadata.aggregate.currentPage);
-    setTotalPages(list.metadata.aggregate.pagesCount);
-
-    let newArticles = list.items.filter(
-      (item) => !readArticles.includes(item.id)
-    );
-    newArticles = [...prevArticles, ...newArticles];
-
-    if (
-      newArticles.length < 4 &&
-      list.metadata.aggregate.pagesCount > currentPage
-    ) {
-      return getSuggestedArticlesFromContentList(
-        listName,
-        readArticles,
-        currentPage,
-        newArticles
+    if (prevRouteType && prevRouteType.type === "page") {
+      // collection
+      collection = await getCollectionByRoute(
+        article.swp_route.id,
+        currentPage
       );
+    } else if (prevRouteType && prevRouteType.type === "tag") {
+      // tag pages
+      collection = await getCollectionByTag(prevRouteType.name, currentPage);
+    } else if (prevRouteType && prevRouteType.type === "author") {
+      // author page
+      collection = await getCollectionByAuthor(prevRouteType.name, currentPage);
+    } else {
+      // content list, directly to article, default
+      let listName = "top news";
+      if (
+        prevRouteType &&
+        prevRouteType.type === "list" &&
+        prevRouteType.name
+      ) {
+        listName = prevRouteType.name;
+      }
+
+      collection = await getContentList(listName, currentPage);
     }
 
-    return newArticles;
-  };
-
-  // recurrency
-  const getSuggestedArticlesFromRoute = async (
-    routeId,
-    readArticles,
-    prevPage,
-    prevArticles
-  ) => {
-    const currentPage = prevPage + 1;
-    const collection = await getCollectionByRoute(routeId, currentPage, 10);
-
-    setPage(collection.metadata.aggregate.currentPage);
-    setTotalPages(collection.metadata.aggregate.pagesCount);
+    // change to collection in case we run out of articles from content list.
+    // Else update state with current values
+    if (
+      (!prevRouteType || prevRouteType.type === "list") &&
+      collection.metadata.aggregate.currentPage ===
+        collection.metadata.aggregate.pagesCount
+    ) {
+      localforage.setItem("prevRouteType", {
+        type: "page",
+        kind: "collection",
+      });
+      setPage(0);
+      setTotalPages(1);
+    } else {
+      setPage(collection.metadata.aggregate.currentPage);
+      setTotalPages(collection.metadata.aggregate.pagesCount);
+    }
 
     let newArticles = collection.items.filter(
       (item) => !readArticles.includes(item.id)
     );
+    newArticles = collection.items.filter(
+      (item) => !readArticles.includes(item.id)
+    );
+
     newArticles = [...prevArticles, ...newArticles];
 
     if (
-      newArticles.length < 4 &&
+      newArticles.length - articles.length < 4 &&
       collection.metadata.aggregate.pagesCount > currentPage
     ) {
-      return getSuggestedArticlesFromRoute(
-        routeId,
+      return getSuggestedArticles(
+        prevRouteType,
         readArticles,
         currentPage,
         newArticles
@@ -136,8 +130,8 @@ const SuggestedArticles = ({ article }) => {
 
   return (
     <>
-      {articles.map((article) => (
-        <Teaser data={article} key={"suggested" + article.id} />
+      {articles.map((article, index) => (
+        <Teaser data={article} key={"suggested_" + article.id + "_" + index} />
       ))}
       {isLoading && (
         <div style={{ padding: "50px 0 60px 0" }}>

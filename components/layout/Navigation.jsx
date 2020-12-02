@@ -3,6 +3,7 @@ import { getMenuItems } from "../../services/menuService";
 import { useRouter } from "next/router";
 import Store from "../Store";
 import Link from "next/link";
+import OnScrollNavbar from "../UI/OnScrollNavbar";
 
 const ActiveLink = ({ href, label }) => {
   const router = useRouter();
@@ -26,18 +27,38 @@ const Navigation = ({ menuName }) => {
   const menuItems = getMenuItems(store.menus, menuName);
 
   return (
-    <nav className="nav">
-      <ul>
-        {menuItems.map((item, index) => (
-          <li key={menuName + "-" + index}>
-            <ActiveLink
-              href={item.swp_route ? item.swp_route.staticprefix : item.uri}
-              label={item.label}
-            />
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <>
+      <OnScrollNavbar offsetFromTop={500}>
+        <nav className="onScrollNavbarNav">
+          <span onClick={() => window.history.back()}>
+            Click here to go back
+          </span>
+
+          <ul>
+            {menuItems.map((item, index) => (
+              <li key={menuName + "-" + index}>
+                <ActiveLink
+                  href={item.swp_route ? item.swp_route.staticprefix : item.uri}
+                  label={item.label}
+                />
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </OnScrollNavbar>
+      <nav className="nav">
+        <ul>
+          {menuItems.map((item, index) => (
+            <li key={menuName + "-" + index}>
+              <ActiveLink
+                href={item.swp_route ? item.swp_route.staticprefix : item.uri}
+                label={item.label}
+              />
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import localforage from "localforage";
 import { motion } from "framer-motion";
 import { getAuthorInfo } from "../../services/authorService";
 import { getCollectionByAuthor } from "../../services/collectionService";
@@ -94,7 +95,15 @@ class Author extends React.Component {
                 <p>
                   total: {store.data.articles.metadata.aggregate.totalCount}
                 </p>
-                <section className="section">
+                <section
+                  className="section"
+                  onClick={() => {
+                    localforage.setItem("prevRouteType", {
+                      type: "author",
+                      name: this.context.data.author.slug,
+                    });
+                  }}
+                >
                   <Listing items={this.state.items} allSmall={true} />
                   {this.state.showLoadMore ? (
                     <ButtonLoadMore
