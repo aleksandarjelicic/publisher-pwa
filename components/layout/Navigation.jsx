@@ -29,10 +29,15 @@ const Navigation = ({ menuName }) => {
   return (
     <>
       <OnScrollNavbar offsetFromTop={500}>
-        <nav className="onScrollNavbarNav">
-          <span onClick={() => window.history.back()}>
+        <nav className="container nav onScrollNavbarNav">
+          <Link href="/">
+            <a className="onScrollNavbar__logo">
+              <img src="/img/logo-small.svg" width="40" alt="" />
+            </a>
+          </Link>
+          {/* <span onClick={() => window.history.back()}>
             Click here to go back
-          </span>
+          </span> */}
 
           <ul>
             {menuItems.map((item, index) => (
