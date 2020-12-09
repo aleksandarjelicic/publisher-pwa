@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import localforage from "localforage";
 import { getMenus } from "../services/menuService";
-import Store from "../components/Store";
 import BaseLayout from "../components/layout/BaseLayout";
 import Homepage from "../components/templates/Homepage";
 
@@ -12,11 +11,9 @@ const Index = (props) => {
   }, [props.route]);
 
   return (
-    <Store.Provider value={{ ...props }}>
-      <BaseLayout>
-        <Homepage />
-      </BaseLayout>
-    </Store.Provider>
+    <BaseLayout>
+      <Homepage />
+    </BaseLayout>
   );
 };
 

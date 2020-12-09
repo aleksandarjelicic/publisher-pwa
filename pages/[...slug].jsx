@@ -5,8 +5,6 @@ import { getMenus } from "../services/menuService";
 import { matchRoute } from "../services/routeMatcherService";
 import { sendPageView } from "../services/publisherAnalytics";
 import { getPaths } from "../services/buildService";
-import Store from "../components/Store";
-
 import Article from "../components/templates/Article/Article";
 import ArticleAMP from "../components/templates/Article/amp/ArticleAMP";
 import Collection from "../components/templates/Collection/Collection";
@@ -77,14 +75,10 @@ const Pages = (props) => {
     }
   }, [props.route]);
 
-  return (
-    <Store.Provider value={{ ...props }}>
-      {isAmp ? (
-        renderer(template)
-      ) : (
-        <BaseLayout>{renderer(template)}</BaseLayout>
-      )}
-    </Store.Provider>
+  return isAmp ? (
+    renderer(template)
+  ) : (
+    <BaseLayout>{renderer(template)}</BaseLayout>
   );
 };
 

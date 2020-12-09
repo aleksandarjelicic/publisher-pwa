@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { getMenus } from "../services/menuService";
 import Store from "../components/Store";
 import BaseLayout from "../components/layout/BaseLayout";
 
 const Logout = (props) => {
+  const store = useContext(Store);
+
   useEffect(() => {
+    store.actions.setUser(null);
+    store.actions.setToken(null);
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("token");
   }, []);
 
   return (
-    <Store.Provider value={{ ...props }}>
-      <BaseLayout>
-        <p>Successfully logged out</p>
-      </BaseLayout>
-    </Store.Provider>
+    <BaseLayout>
+      <p>Successfully logged out</p>
+    </BaseLayout>
   );
 };
 

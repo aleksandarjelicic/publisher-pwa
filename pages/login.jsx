@@ -8,6 +8,8 @@ import BaseLayout from "../components/layout/BaseLayout";
 const publisher_api_url = process.env.NEXT_PUBLIC_PUBLISHER_API_URL;
 
 class Login extends React.Component {
+  static contextType = Store;
+
   state = {
     busy: false,
     auth: { username: "", password: "" },
@@ -33,13 +35,14 @@ class Login extends React.Component {
     this.setState({ busy: true });
 
     axios
-      .post(publisher_api_url + "/auth/", {
-        auth: this.state.auth,
-      })
+      .post(publisher_api_url + "/auth/", this.state.auth)
       .then((response) => {
         toast.success("Successfully logged in");
-        console.log(response.data);
-        //response.data.token.api_key
+        this.context.actions.setUser(response.data.user);
+        this.context.actions.setToken(response.data.token.api_key);
+        sessionStorage.setItem("user", response.data.user);
+        sessionStorage.setItem("token", response.data.token.api_key);
+        this.setState({ busy: false });
       })
       .catch((error) => {
         toast.error("Wrong username or password.");
@@ -90,81 +93,79 @@ class Login extends React.Component {
       this.state.register.password === this.state.register.passwordCheck;
 
     return (
-      <Store.Provider value={{ ...this.props }}>
-        <BaseLayout>
-          <div>
-            <form onSubmit={this.login}>
+      <BaseLayout>
+        <div>
+          <form onSubmit={this.login}>
+            <label htmlFor="username">Username</label>
+            <input
+              name="username"
+              onChange={this.handleAuthChange}
+              value={this.state.auth.username}
+              autoComplete="username"
+              autoFocus
+            />
+
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              onChange={this.handleAuthChange}
+              value={this.state.auth.password}
+              autoComplete="password"
+              type="password"
+            />
+            <button type="submit" disabled={this.state.busy}>
+              login
+            </button>
+          </form>
+          {this.state.thankYouPage ? (
+            <h2>
+              Thank You for registration. Confirmation email has been sent.
+            </h2>
+          ) : (
+            <form onSubmit={this.register}>
+              <label htmlFor="email">Email</label>
+              <input
+                name="email"
+                onChange={this.handleRegisterChange}
+                value={this.state.register.email}
+                type="email"
+              />
               <label htmlFor="username">Username</label>
               <input
                 name="username"
-                onChange={this.handleAuthChange}
-                value={this.state.auth.username}
-                autoComplete="username"
-                autoFocus
+                onChange={this.handleRegisterChange}
+                value={this.state.register.username}
               />
 
               <label htmlFor="password">Password</label>
               <input
                 name="password"
-                onChange={this.handleAuthChange}
-                value={this.state.auth.password}
-                autoComplete="password"
+                onChange={this.handleRegisterChange}
+                value={this.state.register.password}
                 type="password"
+                style={arePasswordsMathing ? {} : { borderColor: "red" }}
               />
-              <button type="submit" disabled={this.state.busy}>
-                login
+
+              <label htmlFor="passwordCheck">
+                Password check (better naming needed here)
+              </label>
+              <input
+                name="passwordCheck"
+                onChange={this.handleRegisterChange}
+                value={this.state.register.passwordCheck}
+                type="password"
+                style={arePasswordsMathing ? {} : { borderColor: "red" }}
+              />
+              <button
+                type="submit"
+                disabled={this.state.busy || !arePasswordsMathing}
+              >
+                register
               </button>
             </form>
-            {this.state.thankYouPage ? (
-              <h2>
-                Thank You for registration. Confirmation email has been sent.
-              </h2>
-            ) : (
-              <form onSubmit={this.register}>
-                <label htmlFor="email">Email</label>
-                <input
-                  name="email"
-                  onChange={this.handleRegisterChange}
-                  value={this.state.register.email}
-                  type="email"
-                />
-                <label htmlFor="username">Username</label>
-                <input
-                  name="username"
-                  onChange={this.handleRegisterChange}
-                  value={this.state.register.username}
-                />
-
-                <label htmlFor="password">Password</label>
-                <input
-                  name="password"
-                  onChange={this.handleRegisterChange}
-                  value={this.state.register.password}
-                  type="password"
-                  style={arePasswordsMathing ? {} : { borderColor: "red" }}
-                />
-
-                <label htmlFor="passwordCheck">
-                  Password check (better naming needed here)
-                </label>
-                <input
-                  name="passwordCheck"
-                  onChange={this.handleRegisterChange}
-                  value={this.state.register.passwordCheck}
-                  type="password"
-                  style={arePasswordsMathing ? {} : { borderColor: "red" }}
-                />
-                <button
-                  type="submit"
-                  disabled={this.state.busy || !arePasswordsMathing}
-                >
-                  register
-                </button>
-              </form>
-            )}
-          </div>
-        </BaseLayout>
-      </Store.Provider>
+          )}
+        </div>
+      </BaseLayout>
     );
   }
 }

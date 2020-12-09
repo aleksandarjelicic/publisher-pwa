@@ -3,11 +3,13 @@ import "intersection-observer";
 import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
 import { useAmp } from "next/amp";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useOnlineStatus from "../hooks/useOnlineStatus";
 import * as gtag from "../services/googleAnalyticsService";
 import * as Sentry from "@sentry/node";
+
+import Store from "../components/Store";
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   Sentry.init({
@@ -20,6 +22,18 @@ function PublisherPwa({ Component, pageProps }) {
   const onlineStatus = useOnlineStatus();
   const isAmp = useAmp();
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (sessionStorage && sessionStorage.getItem("token")) {
+      setToken(sessionStorage.getItem("token"));
+    }
+
+    if (sessionStorage && sessionStorage.getItem("user")) {
+      setUser(sessionStorage.getItem("user"));
+    }
+  }, []);
 
   useEffect(() => {
     if (gtag.GA_TRACKING_ID) {
@@ -73,7 +87,20 @@ function PublisherPwa({ Component, pageProps }) {
         <meta name="robots" content="index,follow" />
       </Head>
       <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} isOnline={onlineStatus} />
+        <Store.Provider
+          value={{
+            ...pageProps,
+            isOnline: onlineStatus,
+            user: user,
+            token: token,
+            actions: {
+              setUser: setUser,
+              setToken: setToken,
+            },
+          }}
+        >
+          <Component {...pageProps} />
+        </Store.Provider>
       </AnimatePresence>
     </>
   );

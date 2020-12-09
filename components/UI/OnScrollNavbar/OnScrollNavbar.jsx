@@ -12,7 +12,7 @@ const useScrollDirection = () => {
     if (scrollY === 0) {
       setScrollDirection(null);
     }
-    console.log(scrollY, prevOffset);
+
     if (scrollY > prevOffset) {
       setScrollDirection("down");
     } else if (scrollY < prevOffset) {

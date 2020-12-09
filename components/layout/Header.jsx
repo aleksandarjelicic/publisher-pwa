@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import Navigation from "./Navigation";
 import Link from "next/link";
+import Store from "../Store";
 
 const Header = () => {
-  // TODO!!!!
-  const isLoggedIn = false;
+  const store = useContext(Store);
+  const isLoggedIn = store.user && store.token;
 
   return (
     <div>
