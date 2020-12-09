@@ -2,6 +2,9 @@ import Navigation from "./Navigation";
 import Link from "next/link";
 
 const Header = () => {
+  // TODO!!!!
+  const isLoggedIn = false;
+
   return (
     <div>
       <header className="head">
@@ -41,10 +44,21 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <img src="/img/icon-login.svg" alt="" />
-                  <span>Login</span>
-                </a>
+                {isLoggedIn ? (
+                  <Link href="/logout">
+                    <a>
+                      <img src="/img/icon-login.svg" alt="" />
+                      <span>Logout</span>
+                    </a>
+                  </Link>
+                ) : (
+                  <Link href="/login">
+                    <a>
+                      <img src="/img/icon-login.svg" alt="" />
+                      <span>Login</span>
+                    </a>
+                  </Link>
+                )}
               </li>
             </ul>
           </nav>
