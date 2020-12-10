@@ -94,77 +94,116 @@ class Login extends React.Component {
 
     return (
       <BaseLayout>
-        <div>
-          <form onSubmit={this.login}>
-            <label htmlFor="username">Username</label>
-            <input
-              name="username"
-              onChange={this.handleAuthChange}
-              value={this.state.auth.username}
-              autoComplete="username"
-              autoFocus
-            />
+        <>
+          <div className="join grid">
+            <div className="join__text grid__item gi-xsmall-12 gi-medium-6">
+              <h2>Login and get exclusive benefits</h2>
+              <p>Enter your email and password to login to your account</p>
+            </div>
+            <div className="join__form grid__item gi-xsmall-12 gi-medium-6">
+              <form onSubmit={this.login}>
+                <div className="join__top marginBottom20">
+                  <h4 className="section__hdl section__hdl--small marginBottom0">
+                    Login
+                  </h4>
+                  <img src="/img/icon-login.svg" alt="" />
+                </div>
+                <input
+                  name="username"
+                  onChange={this.handleAuthChange}
+                  value={this.state.auth.username}
+                  autoComplete="username"
+                  placeholder="Username"
+                  autoFocus
+                />
 
-            <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              onChange={this.handleAuthChange}
-              value={this.state.auth.password}
-              autoComplete="password"
-              type="password"
-            />
-            <button type="submit" disabled={this.state.busy}>
-              login
-            </button>
-          </form>
+                <input
+                  name="password"
+                  onChange={this.handleAuthChange}
+                  value={this.state.auth.password}
+                  autoComplete="password"
+                  type="password"
+                  placeholder="Password"
+                />
+                <button
+                  type="submit"
+                  className="btn btn--color"
+                  disabled={this.state.busy}
+                >
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
           {this.state.thankYouPage ? (
             <h2>
               Thank You for registration. Confirmation email has been sent.
             </h2>
           ) : (
-            <form onSubmit={this.register}>
-              <label htmlFor="email">Email</label>
-              <input
-                name="email"
-                onChange={this.handleRegisterChange}
-                value={this.state.register.email}
-                type="email"
-              />
-              <label htmlFor="username">Username</label>
-              <input
-                name="username"
-                onChange={this.handleRegisterChange}
-                value={this.state.register.username}
-              />
+            <>
+              <div className="join__sep">
+                <span>or</span>
+              </div>
+              <div className="join grid marginBottom-20">
+                <div className="join__text grid__item gi-xsmall-12 gi-medium-6">
+                  <h2>Register and get exclusive content for free</h2>
+                  <p>Complete our short form to register for an account.</p>
+                </div>
+                <div
+                  className="join__form grid__item gi-xsmall-12 gi-medium-6"
+                  style={{ backgroundColor: "#DDDDDD" }}
+                >
+                  <form onSubmit={this.register}>
+                    <div className="join__top marginBottom20">
+                      <h4 className="section__hdl section__hdl--small marginBottom0">
+                        Register
+                      </h4>
+                      <img src="/img/icon-register.svg" alt="" />
+                    </div>
+                    <input
+                      name="email"
+                      onChange={this.handleRegisterChange}
+                      value={this.state.register.email}
+                      placeholder="Email"
+                      type="email"
+                    />
+                    <input
+                      name="username"
+                      onChange={this.handleRegisterChange}
+                      value={this.state.register.username}
+                      placeholder="Username"
+                    />
 
-              <label htmlFor="password">Password</label>
-              <input
-                name="password"
-                onChange={this.handleRegisterChange}
-                value={this.state.register.password}
-                type="password"
-                style={arePasswordsMathing ? {} : { borderColor: "red" }}
-              />
+                    <input
+                      name="password"
+                      onChange={this.handleRegisterChange}
+                      value={this.state.register.password}
+                      type="password"
+                      placeholder="Password"
+                      style={arePasswordsMathing ? {} : { borderColor: "red" }}
+                    />
 
-              <label htmlFor="passwordCheck">
-                Password check (better naming needed here)
-              </label>
-              <input
-                name="passwordCheck"
-                onChange={this.handleRegisterChange}
-                value={this.state.register.passwordCheck}
-                type="password"
-                style={arePasswordsMathing ? {} : { borderColor: "red" }}
-              />
-              <button
-                type="submit"
-                disabled={this.state.busy || !arePasswordsMathing}
-              >
-                register
-              </button>
-            </form>
+                    <input
+                      name="passwordCheck"
+                      onChange={this.handleRegisterChange}
+                      value={this.state.register.passwordCheck}
+                      type="password"
+                      placeholder="Retype password"
+                      style={arePasswordsMathing ? {} : { borderColor: "red" }}
+                    />
+                    <button
+                      type="submit"
+                      className="btn btn--color"
+                      disabled={this.state.busy || !arePasswordsMathing}
+                    >
+                      register
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </>
           )}
-        </div>
+        </>
       </BaseLayout>
     );
   }
